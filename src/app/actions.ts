@@ -12,8 +12,12 @@ import {
 import { z } from 'zod';
 
 const GenerateRecipesActionSchema = z.object({
-  ingredients: z.string().min(3, { message: 'Please enter at least one ingredient (minimum 3 characters).' }),
+  ingredients: z.string().min(3, { message: 'Please enter at least one ingredient.' }),
   language: z.string(),
+  mood: z.string().optional(),
+  weather: z.string().optional(),
+  day: z.string().optional(),
+  festival: z.string().optional(),
 });
 
 type GenerateRecipesActionResult = 
@@ -27,6 +31,10 @@ export async function generateRecipesAction(
   const validatedFields = GenerateRecipesActionSchema.safeParse({
     ingredients: formData.get('ingredients'),
     language: formData.get('language'),
+    mood: formData.get('mood'),
+    weather: formData.get('weather'),
+    day: formData.get('day'),
+    festival: formData.get('festival'),
   });
 
   if (!validatedFields.success) {
@@ -39,7 +47,7 @@ export async function generateRecipesAction(
   try {
     const recipes = await generateRecipes(validatedFields.data);
     if (recipes.length === 0) {
-      return { success: false, error: 'Could not generate recipes from these ingredients. Try different ones.' };
+      return { success: false, error: 'Could not generate recipes. Try different ingredients or context.' };
     }
     return { success: true, data: recipes };
   } catch (error) {
@@ -56,15 +64,10 @@ export async function summarizeNutritionalInfoAction(
   input: SummarizeNutritionalInformationInput
 ): Promise<SummarizeNutritionalInfoActionResult> {
   try {
-    const result = await summarizeNutritionalInformation({
-      recipeName: input.recipeName,
-      ingredients: input.ingredients,
-      instructions: input.instructions,
-      language: input.language
-    });
+    const result = await summarizeNutritionalInformation(input);
     return { success: true, data: result.summary };
   } catch (error) {
     console.error('Error summarizing nutritional info:', error);
-    return { success: false, error: 'Failed to get nutritional information for this recipe.' };
+    return { success: false, error: 'Failed to get nutritional information.' };
   }
 }

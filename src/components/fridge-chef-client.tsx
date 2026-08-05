@@ -11,8 +11,12 @@ import { Separator } from '@/components/ui/separator';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Logo } from '@/components/logo';
+import { Input } from '@/components/ui/input';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ChefHat, CookingPot, GlassWater, LeafyGreen, Loader2, Utensils, Sparkles, BookOpen, Globe, Heart } from 'lucide-react';
+import { 
+  ChefHat, CookingPot, GlassWater, LeafyGreen, Loader2, Utensils, 
+  Sparkles, BookOpen, Globe, Heart, CloudSun, Smile, CalendarDays, PartyPopper 
+} from 'lucide-react';
 import {
   Select,
   SelectContent,
@@ -27,156 +31,233 @@ type Recipe = GenerateRecipesOutput[0];
 const translations = {
   en: {
     whatsInYourFridge: "What's in your fridge?",
-    placeholder: "e.g., rice, broccoli, soy sauce, ginger, garlic...",
+    placeholder: "e.g., rice, broccoli, soy sauce...",
     generateRecipes: "Generate Recipes",
     startNewSearch: "Start New Search",
     craftingCulinary: "Crafting your culinary creations...",
-    aiChefWorking: "Our AI chef is looking through the pantry and heating up the pans. Your delicious recipes will be ready in a moment!",
-    welcome: "Welcome to Your Personal Kitchen AI!",
-    welcomeSub: "Tired of wondering what to cook? Enter the ingredients you have, and let FridgeChef inspire your next meal.",
+    aiChefWorking: "Our AI chef is looking through the pantry. Your recipes will be ready soon!",
+    welcome: "Welcome to FridgeChef!",
+    welcomeSub: "Enter ingredients, mood, and weather to get personalized recipe ideas.",
     recipeIdeas: "Recipe Ideas",
     ingredients: "Ingredients",
     nutritionalSummary: "Nutritional Summary",
     instructions: "Instructions",
     noNutrition: "No nutritional information available.",
     language: "Language",
-    favorites: "Favorites"
+    favorites: "Favorites",
+    kitchenVibe: "Kitchen Vibe",
+    mood: "Mood",
+    weather: "Weather",
+    festival: "Festival / Occasion",
+    happy: "Happy",
+    tired: "Tired",
+    energetic: "Energetic",
+    calm: "Calm",
+    sunny: "Sunny",
+    rainy: "Rainy",
+    cold: "Cold",
+    hot: "Hot",
+    festivalPlaceholder: "e.g., Diwali, Christmas..."
   },
   es: {
     whatsInYourFridge: "¿Qué hay en tu nevera?",
-    placeholder: "Ej., arroz, brócoli, salsa de soja, jengibre, ajo...",
+    placeholder: "Ej., arroz, brócoli, salsa de soja...",
     generateRecipes: "Generar Recetas",
-    startNewSearch: "Empezar Nueva Búsqueda",
-    craftingCulinary: "Creando tus creaciones culinarias...",
-    aiChefWorking: "Nuestro chef de IA está mirando en la despensa y calentando las sartenes. ¡Tus deliciosas recetas estarán listas en un momento!",
-    welcome: "¡Bienvenido a tu IA de Cocina Personal!",
-    welcomeSub: "¿Cansado de preguntarte qué cocinar? Introduce los ingredientes que tienes y deja que FridgeChef inspire tu próxima comida.",
+    startNewSearch: "Nueva Búsqueda",
+    craftingCulinary: "Creando tus creaciones...",
+    aiChefWorking: "Nuestro chef está en la despensa. ¡Listos en un momento!",
+    welcome: "¡Bienvenido a FridgeChef!",
+    welcomeSub: "Ingresa ingredientes, ánimo y clima para ideas personalizadas.",
     recipeIdeas: "Ideas de Recetas",
     ingredients: "Ingredientes",
     nutritionalSummary: "Resumen Nutricional",
     instructions: "Instrucciones",
-    noNutrition: "No hay información nutricional disponible.",
+    noNutrition: "Sin información nutricional.",
     language: "Idioma",
-    favorites: "Favoritos"
+    favorites: "Favoritos",
+    kitchenVibe: "Vibra de Cocina",
+    mood: "Ánimo",
+    weather: "Clima",
+    festival: "Festival / Ocasión",
+    happy: "Feliz",
+    tired: "Cansado",
+    energetic: "Enérgico",
+    calm: "Tranquilo",
+    sunny: "Soleado",
+    rainy: "Lluvioso",
+    cold: "Frío",
+    hot: "Calor"
   },
   fr: {
     whatsInYourFridge: "Qu'y a-t-il dans votre frigo ?",
-    placeholder: "Ex : riz, brocoli, sauce soja, gingembre, ail...",
+    placeholder: "Ex : riz, brocoli, sauce soja...",
     generateRecipes: "Générer des Recettes",
     startNewSearch: "Nouvelle Recherche",
-    craftingCulinary: "Préparation de vos créations culinaires...",
-    aiChefWorking: "Notre chef IA regarde dans le garde-manger et chauffe les poêles. Vos délicieuses recettes seront prêtes dans un instant !",
-    welcome: "Bienvenue sur votre IA de Cuisine Personnelle !",
-    welcomeSub: "Fatigué de vous demander quoi cuisiner ? Entrez les ingrédients que vous avez et laissez FridgeChef inspirer votre prochain repas.",
+    craftingCulinary: "Création de vos recettes...",
+    aiChefWorking: "Notre chef IA regarde dans le garde-manger. Prêt bientôt !",
+    welcome: "Bienvenue sur FridgeChef !",
+    welcomeSub: "Entrez ingrédients, humeur et météo pour des idées personnalisées.",
     recipeIdeas: "Idées de Recettes",
     ingredients: "Ingrédients",
     nutritionalSummary: "Résumé Nutritionnel",
     instructions: "Instructions",
-    noNutrition: "Aucune information nutritionnelle disponible.",
+    noNutrition: "Aucune information nutritionnelle.",
     language: "Langue",
-    favorites: "Favoris"
+    favorites: "Favoris",
+    kitchenVibe: "Ambiance Cuisine",
+    mood: "Humeur",
+    weather: "Météo",
+    festival: "Festival / Occasion",
+    happy: "Heureux",
+    tired: "Fatigué",
+    energetic: "Énergique",
+    calm: "Calme",
+    sunny: "Ensoleillé",
+    rainy: "Pluvieux",
+    cold: "Froid",
+    hot: "Chaud"
   },
   hi: {
     whatsInYourFridge: "आपके फ्रिज में क्या है?",
-    placeholder: "उदा., चावल, ब्रोकोली, सोया सॉस, अदरक, लहसुन...",
+    placeholder: "उदा., चावल, ब्रोकोली...",
     generateRecipes: "रेसिपी बनाएं",
-    startNewSearch: "नई खोज शुरू करें",
-    craftingCulinary: "आपकी पाक कृतियाँ तैयार हो रही हैं...",
-    aiChefWorking: "हमारा AI शेफ पेंट्री में देख रहा है और पैन गरम कर रहा है। आपकी स्वादिष्ट रेसिपी कुछ ही पल में तैयार हो जाएगी!",
-    welcome: "आपके व्यक्तिगत किचन एआई में आपका स्वागत है!",
-    welcomeSub: "क्या पकाएं, यह सोचकर थक गए हैं? आपके पास जो सामग्री है, उसे दर्ज करें, और फ्रिजशेफ को अपनी अगली भोजन को प्रेरित करने दें।",
+    startNewSearch: "नई खोज",
+    welcome: "FridgeChef में आपका स्वागत है!",
+    welcomeSub: "व्यक्तिगत विचारों के लिए सामग्री, मूड और मौसम दर्ज करें।",
     recipeIdeas: "रेसिपी आइडिया",
     ingredients: "सामग्री",
-    nutritionalSummary: "पोषण संबंधी सारांश",
+    nutritionalSummary: "पोषण सारांश",
     instructions: "निर्देश",
-    noNutrition: "कोई पोषण संबंधी जानकारी उपलब्ध नहीं है।",
     language: "भाषा",
-    favorites: "पसंदीदा"
+    favorites: "पसंदीदा",
+    kitchenVibe: "किचन वाइब",
+    mood: "मूड",
+    weather: "मौसम",
+    festival: "त्योहार / अवसर",
+    happy: "खुश",
+    tired: "थका हुआ",
+    energetic: "ऊर्जावान",
+    calm: "शांत",
+    sunny: "धूप",
+    rainy: "बरसात",
+    cold: "ठंड",
+    hot: "गर्मी"
   },
   gu: {
     whatsInYourFridge: "તમારા ફ્રિજમાં શું છે?",
-    placeholder: "દા.ત., ચોખા, બ્રોકોલી, સોયા સોસ, આદુ, લસણ...",
+    placeholder: "દા.ત., ચોખા, બ્રોકોલી...",
     generateRecipes: "રેસિપી બનાવો",
-    startNewSearch: "નવી શોધ શરૂ કરો",
-    craftingCulinary: "તમારી રસોઈ રચનાઓ તૈયાર કરી રહ્યા છીએ...",
-    aiChefWorking: "અમારો AI શૅફ પેન્ટ્રીમાં જોઈ રહ્યો છે અને તવા ગરમ કરી રહ્યો છે. તમારી સ્વાદિષ્ટ વાનગીઓ થોડી જ વારમાં તૈયાર થઈ જશે!",
-    welcome: "તમારા વ્યક્તિગત કિચન AI માં આપનું સ્વાગત છે!",
-    welcomeSub: "શું રાંધવું તે વિચારીને થાકી ગયા છો? તમારી પાસે જે ઘટકો છે તે દાખલ કરો, અને ફ્રિજશેફને તમારી આગામી ભોજન માટે પ્રેરણા આપવા દો।",
+    welcome: "FridgeChef માં સ્વાગત છે!",
     recipeIdeas: "રેસિપી આઈડિયા",
     ingredients: "ઘટકો",
     nutritionalSummary: "પોષણ સારાંશ",
     instructions: "સૂચનાઓ",
-    noNutrition: "કોઈ પોષક માહિતી ઉપલબ્ધ નથી।",
     language: "ભાષા",
-    favorites: "મનપસંદ"
+    favorites: "મનપસંદ",
+    kitchenVibe: "રસોડું વાઇબ",
+    mood: "મૂડ",
+    weather: "હવામાન",
+    festival: "તહેવાર / પ્રસંગ",
+    happy: "ખુશ",
+    tired: "થાકેલા",
+    energetic: "ઉર્જાવાન",
+    calm: "શાંત",
+    sunny: "તડકો",
+    rainy: "વરસાદ",
+    cold: "ઠંડી",
+    hot: "ગરમી"
   },
   ta: {
-    whatsInYourFridge: "உங்கள் குளிர்சாதன பெட்டியில் என்ன இருக்கிறது?",
-    placeholder: "எ.கா., அரிசி, ப்ரோக்கோலி, சோயா சாஸ், இஞ்சி, பூண்டு...",
+    whatsInYourFridge: "உங்கள் பிரிட்ஜில் என்ன இருக்கிறது?",
     generateRecipes: "சமையல் குறிப்புகளை உருவாக்கு",
-    startNewSearch: "புதிய தேடலைத் தொடங்கு",
-    craftingCulinary: "உங்கள் சமையல் படைப்புகளை உருவாக்குகிறோம்...",
-    aiChefWorking: "எங்கள் AI சமையல்காரர் சரக்கறையைப் பார்த்து, பாத்திரங்களை சூடாக்குகிறார். உங்கள் சுவையான சமையல் குறிப்புகள் ஒரு கணத்தில் தயாராகிவிடும்!",
-    welcome: "உங்கள் தனிப்பட்ட சமையலறை AIக்கு வரவேற்கிறோம்!",
-    welcomeSub: "என்ன சமைப்பது என்று யோசித்து சோர்வடைந்துவிட்டீர்களா? உங்களிடம் உள்ள பொருட்களை உள்ளிடவும், உங்கள் அடுத்த உணவை FridgeChef ஊக்குவிக்கட்டும்.",
+    welcome: "FridgeChefக்கு வரவேற்கிறோம்!",
     recipeIdeas: "சமையல் யோசனைகள்",
     ingredients: "பொருட்கள்",
     nutritionalSummary: "ஊட்டச்சத்து சுருக்கம்",
     instructions: "வழிமுறைகள்",
-    noNutrition: "ஊட்டச்சத்து தகவல் எதுவும் கிடைக்கவில்லை.",
     language: "மொழி",
-    favorites: "பிடித்தவை"
+    favorites: "பிடித்தவை",
+    kitchenVibe: "சமையலறை சூழல்",
+    mood: "மனநிலை",
+    weather: "வானிலை",
+    festival: "திருவிழா / நிகழ்வு",
+    happy: "மகிழ்ச்சி",
+    tired: "சோர்வு",
+    energetic: "துடிப்பு",
+    calm: "அமைதி",
+    sunny: "வெயில்",
+    rainy: "மழை",
+    cold: "குளிர்",
+    hot: "வெப்பம்"
   },
   or: {
     whatsInYourFridge: "ଆପଣଙ୍କ ଫ୍ରିଜରେ କ'ଣ ଅଛି?",
-    placeholder: "ଉଦା., ଭାତ, ବ୍ରୋକୋଲି, ସୋୟା ସସ୍, ଅଦା, ରସୁଣ...",
     generateRecipes: "ରେସିପି ପ୍ରସ୍ତୁତ କରନ୍ତୁ",
-    startNewSearch: "ନୂଆ ସନ୍ଧାନ ଆରମ୍ଭ କରନ୍ତୁ",
-    craftingCulinary: "ଆପଣଙ୍କ ରୋଷେଇ କଳାକୃତି ପ୍ରସ୍ତୁତ କରାଯାଉଛି...",
-    aiChefWorking: "ଆମର AI ରୋଷେୟା ପ୍ୟାଣ୍ଟ୍ରିରେ ଦେଖୁଛନ୍ତି ଏବଂ ପାତ୍ର ଗରମ କରୁଛନ୍ତି। ଆପଣଙ୍କ ସ୍ୱାଦିଷ୍ଟ ରେସିପିଗୁଡିକ କିଛି ମୁହୂର୍ତ୍ତରେ ପ୍ରସ୍ତୁତ ହୋଇଯିବ!",
-    welcome: "ଆପଣଙ୍କ ବ୍ୟକ୍ତିଗତ ରୋଷେଇ AIକୁ ସ୍ୱାଗତ!",
-    welcomeSub: "କ'ଣ ରାନ୍ଧିବେ ଭାବି ଭାବି କ୍ଳାନ୍ତ ହୋଇଗଲେଣି କି? ଆପଣଙ୍କ ପାଖରେ ଥିବା ସାମଗ୍ରୀଗୁଡିକ ପ୍ରବେଶ କରାନ୍ତୁ ଏବଂ ଫ୍ରିଜ୍‌ଶେଫ୍‌କୁ ଆପଣଙ୍କ ପରବର୍ତ୍ତୀ ଭୋଜନ ପାଇଁ ପ୍ରେରଣା ଦେବାକୁ ଦିଅନ୍ତୁ।",
+    welcome: "FridgeChefକୁ ସ୍ୱାଗତ!",
     recipeIdeas: "ରେସିପି ଆଇଡିଆ",
     ingredients: "ସାମଗ୍ରୀ",
     nutritionalSummary: "ପୋଷଣ ସାରାଂଶ",
-    instructions: "ନିର୍ଦ୍ଦେଶାବଳୀ",
-    noNutrition: "କୌଣସି ପୋଷଣ ସମ୍ବନ୍ଧୀୟ ସୂଚନା ଉପଲବ୍ଧ ନାହିଁ।",
+    instructions: "ନିର୍ଦ୍દેશାବଳୀ",
     language: "ଭାଷା",
-    favorites: "ପସନ୍ଦିତ"
+    favorites: "ପସନ୍ଦିତ",
+    kitchenVibe: "ରୋଷେଇ ଘର ମାହୋଲ",
+    mood: "ମନୋଭାବ",
+    weather: "ପାଣିପାଗ",
+    festival: "ପର୍ବ / ଅବସର",
+    happy: "ଖୁସି",
+    tired: "ଥକିଯାଇଥିବା",
+    energetic: "ଉତ୍ସାହୀ",
+    calm: "ଶାନ୍ତ",
+    sunny: "ଖରା",
+    rainy: "ବର୍ଷା",
+    cold: "ଥଣ୍ଡା",
+    hot: "ଗରମ"
   },
   pa: {
     whatsInYourFridge: "ਤੁਹਾਡੇ ਫਰਿੱਜ ਵਿੱਚ ਕੀ ਹੈ?",
-    placeholder: "ਉਦਾਹਰਨ ਲਈ, ਚਾਵਲ, ਬਰੋਕਲੀ, ਸੋਇਆ ਸਾਸ, ਅਦਰਕ, ਲਸਣ...",
     generateRecipes: "ਵਿਅੰਜਨ ਬਣਾਓ",
-    startNewSearch: "ਨਵੀਂ ਖੋਜ ਸ਼ੁਰੂ ਕਰੋ",
-    craftingCulinary: "ਤੁਹਾਡੀਆਂ ਰਸੋਈ ਰਚਨਾਵਾਂ ਤਿਆਰ ਕੀਤੀਆਂ ਜਾ ਰਹੀਆਂ ਹਨ...",
-    aiChefWorking: "ਸਾਡਾ ਏਆਈ ਸ਼ੈੱਫ ਪੈਂਟਰੀ ਵਿੱਚ ਦੇਖ ਰਿਹਾ ਹੈ ਅਤੇ ਪੈਨ ਗਰਮ ਕਰ ਰਿਹਾ ਹੈ। ਤੁਹਾਡੀਆਂ ਸੁਆਦੀ ਪਕਵਾਨਾਂ ਇੱਕ ਪਲ ਵਿੱਚ ਤਿਆਰ ਹੋ ਜਾਣਗੀਆਂ!",
-    welcome: "ਤੁਹਾਡੇ ਨਿੱਜੀ ਕਿਚਨ ਏਆਈ ਵਿੱਚ ਤੁਹਾਡਾ ਸੁਆਗਤ ਹੈ!",
-    welcomeSub: "ਕੀ ਪਕਾਉਣਾ ਹੈ, ਇਹ ਸੋਚ ਕੇ ਥੱਕ ਗਏ ਹੋ? ਤੁਹਾਡੇ ਕੋਲ ਜੋ ਸਮੱਗਰੀ ਹੈ, ਉਸਨੂੰ ਦਾਖਲ ਕਰੋ, ਅਤੇ ਫਰਿੱਜਸ਼ੈਫ ਨੂੰ ਆਪਣੇ ਅਗਲੇ ਭੋਜਨ ਲਈ ਪ੍ਰੇਰਿਤ ਕਰਨ ਦਿਓ।",
+    welcome: "FridgeChef ਵਿੱਚ ਸੁਆਗਤ ਹੈ!",
     recipeIdeas: "ਵਿਅੰਜਨ ਵਿਚਾਰ",
-    ingredients: "ਸਮੱਗਰੀ",
+    ingredients: "ਸਮੱਗરી",
     nutritionalSummary: "ਪੋਸ਼ਣ ਸੰਬੰਧੀ ਸਾਰ",
     instructions: "ਹਦਾਇਤਾਂ",
-    noNutrition: "ਕੋਈ ਪੋਸ਼ਣ ਸੰਬੰਧੀ ਜਾਣਕਾਰੀ ਉਪਲਬਧ ਨਹੀਂ ਹੈ।",
     language: "ਭਾਸ਼ਾ",
-    favorites: "ਮਨਪਸੰਦ"
+    favorites: "ਮਨਪਸੰਦ",
+    kitchenVibe: "ਕਿਚਨ ਵਾਈਬ",
+    mood: "ਮੂਡ",
+    weather: "ਮੌਸਮ",
+    festival: "ਤਿਉਹਾਰ / ਮੌਕਾ",
+    happy: "ਖੁਸ਼",
+    tired: "ਥੱਕਿਆ ਹੋਇਆ",
+    energetic: "ਉਰਜਾਵਾਨ",
+    calm: "ਸ਼ਾਂਤ",
+    sunny: "ਧੁੱਪ",
+    rainy: "ਮੀਂਹ",
+    cold: "ਠੰਡ",
+    hot: "ਗਰਮੀ"
   },
   ur: {
     whatsInYourFridge: "آپ کے فریج میں کیا ہے؟",
-    placeholder: "مثال کے طور پر، چاول، بروکولی، سویا ساس، ادرک، لہسن...",
     generateRecipes: "ترکیبیں بنائیں",
-    startNewSearch: "نئی تلاش شروع کریں",
-    craftingCulinary: "آپ کے پکوان کی تخلیقات تیار ہو رہی ہیں...",
-    aiChefWorking: "ہمارا اے آئی شیف پینٹری میں دیکھ रहा ہے اور پین گرم کر رہا ہے۔ آپ کی مزیدار ترکیبیں ایک لمحے میں تیار ہو جائیں گی!",
-    welcome: "آپ کے ذاتی کچن اے آئی میں خوش آمدید!",
-    welcomeSub: "کیا پکانا ہے، یہ سوچ کر تھک گئے ہیں؟ آپ کے پاس جو اجزاء ہیں، وہ درج کریں، اور فرج شیف کو آپ کے اگلے کھانے کے لیے متاثر کرنے دیں۔",
+    welcome: "FridgeChef میں خوش آمدید!",
     recipeIdeas: "ترکیب کے آئیڈیاز",
     ingredients: "اجزاء",
     nutritionalSummary: "غذائی خلاصہ",
     instructions: "ہدایات",
-    noNutrition: "کوئی غذائی معلومات دستیاب نہیں ہے۔",
     language: "زبان",
-    favorites: "پسندیدہ"
+    favorites: "پسندیدہ",
+    kitchenVibe: "کچن وائب",
+    mood: "موڈ",
+    weather: "موسم",
+    festival: "تہوار / موقع",
+    happy: "خوش",
+    tired: "تھکا ہوا",
+    energetic: "توانا",
+    calm: "پرسکون",
+    sunny: "دھوپ",
+    rainy: "بارش",
+    cold: "سردی",
+    hot: "گرمی"
   }
 };
 
@@ -193,7 +274,7 @@ export function FridgeChefClient() {
 
   const [generateRecipesState, formAction, isPending] = useActionState(generateRecipesAction, null);
 
-  const t = translations[language];
+  const t = translations[language] || translations['en'];
 
   useEffect(() => {
     if (generateRecipesState?.success) {
@@ -263,221 +344,266 @@ export function FridgeChefClient() {
       </header>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        <aside className="lg:col-span-4 xl:col-span-3 space-y-8">
+        <aside className="lg:col-span-4 xl:col-span-3 space-y-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="sticky top-8"
+            className="sticky top-8 space-y-6"
           >
-            <Card className="bg-card/70 border-border/50 shadow-lg transition-all duration-300 hover:shadow-xl">
-              <CardHeader>
+            <Card className="bg-card/70 border-border/50 shadow-lg">
+              <CardHeader className="pb-4">
                 <CardTitle className="flex items-center gap-2 font-headline text-xl">
                   <ChefHat size={24} className="text-primary-foreground" />
                   {t.whatsInYourFridge}
                 </CardTitle>
               </CardHeader>
-              <CardContent>
-                <form key={formKey} action={formAction}>
+              <CardContent className="space-y-4">
+                <form key={formKey} action={formAction} className="space-y-4">
                   <Textarea
                     name="ingredients"
                     placeholder={t.placeholder}
-                    className="min-h-[150px] text-base bg-background/50 focus-visible:ring-primary-foreground focus-visible:ring-2 border-border/60"
+                    className="min-h-[120px] text-base bg-background/50 focus-visible:ring-primary-foreground"
                     required
                   />
-                  <input type="hidden" name="language" value={language} />
+                  
+                  <Separator className="opacity-50" />
+                  
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-2 text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+                      <Sparkles size={16} />
+                      {t.kitchenVibe}
+                    </div>
 
-                   <div className="mt-4 space-y-2">
-                     <div className="space-y-1">
-                       <label htmlFor="language-select" className="text-sm font-medium flex items-center gap-2"><Globe className="w-4 h-4"/>{t.language}</label>
-                        <Select onValueChange={(value: keyof typeof translations) => setLanguage(value)} defaultValue={language}>
-                          <SelectTrigger id="language-select">
-                            <SelectValue placeholder="Select language" />
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="space-y-1">
+                        <label className="text-xs font-medium flex items-center gap-1"><Smile size={12}/>{t.mood}</label>
+                        <Select name="mood" defaultValue="calm">
+                          <SelectTrigger className="h-9 text-xs">
+                            <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="en">English</SelectItem>
-                            <SelectItem value="es">Español</SelectItem>
-                            <SelectItem value="fr">Français</SelectItem>
-                            <SelectItem value="hi">हिन्दी</SelectItem>
-                            <SelectItem value="gu">ગુજરાતી</SelectItem>
-                            <SelectItem value="ta">தமிழ்</SelectItem>
-                            <SelectItem value="or">ଓଡ଼ିଆ</SelectItem>
-                            <SelectItem value="pa">ਪੰਜਾਬੀ</SelectItem>
-                            <SelectItem value="ur">اردو</SelectItem>
+                            <SelectItem value="happy">{t.happy}</SelectItem>
+                            <SelectItem value="tired">{t.tired}</SelectItem>
+                            <SelectItem value="energetic">{t.energetic}</SelectItem>
+                            <SelectItem value="calm">{t.calm}</SelectItem>
                           </SelectContent>
                         </Select>
-                     </div>
-                   </div>
+                      </div>
+                      <div className="space-y-1">
+                        <label className="text-xs font-medium flex items-center gap-1"><CloudSun size={12}/>{t.weather}</label>
+                        <Select name="weather" defaultValue="sunny">
+                          <SelectTrigger className="h-9 text-xs">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="sunny">{t.sunny}</SelectItem>
+                            <SelectItem value="rainy">{t.rainy}</SelectItem>
+                            <SelectItem value="cold">{t.cold}</SelectItem>
+                            <SelectItem value="hot">{t.hot}</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
 
-                  <Button type="submit" className="mt-4 w-full bg-primary text-primary-foreground hover:bg-primary/90 text-md font-bold py-6" disabled={isPending}>
-                    {isPending ? (
-                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                    ) : (
-                      <>
-                        <Sparkles className="mr-2 h-5 w-5" />
-                        {t.generateRecipes}
-                      </>
-                    )}
+                    <div className="space-y-1">
+                      <label className="text-xs font-medium flex items-center gap-1"><PartyPopper size={12}/>{t.festival}</label>
+                      <Input 
+                        name="festival" 
+                        placeholder={t.festivalPlaceholder || "Occasion"} 
+                        className="h-9 text-xs"
+                      />
+                    </div>
+                    
+                    <input type="hidden" name="day" value={new Date().toLocaleDateString('en-US', { weekday: 'long' })} />
+                    <input type="hidden" name="language" value={language} />
+
+                    <div className="space-y-1">
+                      <label className="text-xs font-medium flex items-center gap-1"><Globe size={12}/>{t.language}</label>
+                      <Select onValueChange={(value: keyof typeof translations) => setLanguage(value)} defaultValue={language}>
+                        <SelectTrigger className="h-9 text-xs">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="en">English</SelectItem>
+                          <SelectItem value="es">Español</SelectItem>
+                          <SelectItem value="fr">Français</SelectItem>
+                          <SelectItem value="hi">हिन्दी</SelectItem>
+                          <SelectItem value="gu">ગુજરાતી</SelectItem>
+                          <SelectItem value="ta">தமிழ்</SelectItem>
+                          <SelectItem value="or">ଓଡ଼ିଆ</SelectItem>
+                          <SelectItem value="pa">ਪੰਜਾਬੀ</SelectItem>
+                          <SelectItem value="ur">اردو</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  <Button type="submit" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-bold" disabled={isPending}>
+                    {isPending ? <Loader2 className="animate-spin" /> : <Sparkles className="mr-2" />}
+                    {t.generateRecipes}
                   </Button>
                 </form>
                 {recipes && (
-                   <Button variant="outline" className="mt-2 w-full" onClick={handleNewSearch}>
+                   <Button variant="ghost" className="w-full text-xs" onClick={handleNewSearch}>
                      {t.startNewSearch}
                    </Button>
                 )}
               </CardContent>
             </Card>
-          </motion.div>
-          {favorites.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="sticky top-[calc(100vh-280px)]"
-            >
-              <Card className="bg-card/70 border-border/50 shadow-lg transition-all duration-300 hover:shadow-xl">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 font-headline text-xl">
-                    <Heart size={24} className="text-primary-foreground" />
+
+            {favorites.length > 0 && (
+              <Card className="bg-card/70 border-border/50 shadow-md">
+                <CardHeader className="py-3">
+                  <CardTitle className="flex items-center gap-2 text-md">
+                    <Heart size={18} className="text-primary-foreground" />
                     {t.favorites}
                   </CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <ScrollArea className="h-[150px]">
-                    <div className="space-y-2">
+                <CardContent className="px-3 pb-3">
+                  <ScrollArea className="h-[120px]">
+                    <div className="space-y-1">
                       {favorites.map((fav, index) => (
                         <Button
                           key={index}
                           variant="ghost"
-                          className="w-full justify-start"
+                          className="w-full justify-start text-xs h-8 px-2"
                           onClick={() => setSelectedRecipe(fav)}
                         >
-                          {fav.title}
+                          <span className="truncate">{fav.title}</span>
                         </Button>
                       ))}
                     </div>
                   </ScrollArea>
                 </CardContent>
               </Card>
-            </motion.div>
-          )}
+            )}
+          </motion.div>
         </aside>
 
-        <main className="lg:col-span-8 xl:col-span-9">
+        <main className="lg:col-span-8 xl:col-span-9 min-h-[600px]">
           <AnimatePresence mode="wait">
             {isPending && !recipes ? (
               <motion.div
                 key="loading"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.3 }}
-                className="flex flex-col items-center justify-center h-full min-h-[500px] rounded-2xl border-2 border-dashed border-border/30 gap-6 text-center"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="flex flex-col items-center justify-center h-[500px] border-2 border-dashed border-border/30 rounded-2xl text-center"
               >
-                <Loader2 className="h-16 w-16 animate-spin text-primary" />
-                <h3 className="text-2xl font-bold text-foreground tracking-tight">{t.craftingCulinary}</h3>
-                <p className="text-muted-foreground max-w-sm">{t.aiChefWorking}</p>
+                <Loader2 className="h-12 w-12 animate-spin text-primary mb-4" />
+                <h3 className="text-xl font-bold">{t.craftingCulinary}</h3>
+                <p className="text-muted-foreground mt-2">{t.aiChefWorking}</p>
               </motion.div>
             ) : !recipes ? (
               <motion.div
                 key="welcome"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.3 }}
-                className="flex flex-col items-center justify-center h-full min-h-[500px] rounded-2xl border-2 border-dashed border-border/30 gap-6 text-center p-8"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="flex flex-col items-center justify-center h-[500px] border-2 border-dashed border-border/30 rounded-2xl text-center p-8"
               >
-                <CookingPot className="h-20 w-20 text-muted-foreground" strokeWidth={1.5} />
-                <h2 className="text-3xl font-bold tracking-tight text-foreground">{t.welcome}</h2>
-                <p className="text-lg text-muted-foreground max-w-md">
-                  {t.welcomeSub}
-                </p>
+                <CookingPot className="h-16 w-16 text-muted-foreground mb-4 opacity-50" />
+                <h2 className="text-2xl font-bold">{t.welcome}</h2>
+                <p className="text-muted-foreground mt-2 max-w-md">{t.welcomeSub}</p>
               </motion.div>
             ) : (
-              <motion.div
-                key="results"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
-                <div className="flex flex-col gap-8">
-                  <Card className="bg-card/70 border-border/50 shadow-sm">
-                    <CardHeader>
-                      <CardTitle className="font-headline text-2xl flex items-center gap-2">
-                        <BookOpen className="text-primary-foreground" />
-                        {t.recipeIdeas}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <ScrollArea className="max-h-[200px]">
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                          {recipes.map((recipe, index) => (
-                            <motion.button
-                              key={index}
-                              initial={{ opacity: 0, y: 15 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ duration: 0.3, delay: index * 0.05 }}
-                              data-active={selectedRecipe?.title === recipe.title}
-                              className="text-left p-4 rounded-lg transition-all duration-200 border-2 border-transparent hover:border-primary/50 hover:bg-primary/10 data-[active=true]:bg-primary/20 data-[active=true]:border-primary/80 data-[active=true]:shadow-md"
-                              onClick={() => setSelectedRecipe(recipe)}
-                            >
-                              <h3 className="font-bold text-lg text-foreground data-[active=true]:text-primary-foreground">
-                                {recipe.title}
-                              </h3>
-                            </motion.button>
-                          ))}
-                        </div>
-                      </ScrollArea>
-                    </CardContent>
-                  </Card>
-                  
-                  <AnimatePresence>
+              <div className="space-y-6">
+                <Card className="bg-card/70 border-border/50 shadow-sm overflow-hidden">
+                  <CardHeader className="bg-muted/30 py-4">
+                    <CardTitle className="text-lg flex items-center gap-2">
+                      <BookOpen size={20} className="text-primary-foreground" />
+                      {t.recipeIdeas}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-4">
+                    <div className="flex flex-wrap gap-2">
+                      {recipes.map((recipe, index) => (
+                        <Button
+                          key={index}
+                          variant={selectedRecipe?.title === recipe.title ? "default" : "outline"}
+                          className={cn(
+                            "rounded-full transition-all text-sm",
+                            selectedRecipe?.title === recipe.title ? "bg-primary text-primary-foreground shadow-md" : "hover:bg-primary/10"
+                          )}
+                          onClick={() => setSelectedRecipe(recipe)}
+                        >
+                          {recipe.title}
+                        </Button>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+                
+                <AnimatePresence mode="wait">
                   {selectedRecipe && (
                     <motion.div
                       key={selectedRecipe.title}
-                      initial={{ opacity: 0, y: 20 }}
+                      initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      transition={{ duration: 0.4 }}
+                      exit={{ opacity: 0, scale: 0.98 }}
+                      transition={{ duration: 0.3 }}
                     >
-                      <Card className="bg-card/70 border-border/50 shadow-sm">
-                        <CardHeader>
-                            <div className="flex items-center justify-between">
-                              <CardTitle className="text-3xl font-headline tracking-tight">{selectedRecipe.title}</CardTitle>
-                              <Button variant="ghost" size="icon" onClick={() => toggleFavorite(selectedRecipe)}>
-                                <Heart className={cn("w-6 h-6", isFavorite(selectedRecipe) ? "fill-red-500 text-red-500" : "text-gray-400")} />
-                              </Button>
-                            </div>
+                      <Card className="bg-card/70 border-border/50 shadow-md">
+                        <CardHeader className="flex flex-row items-center justify-between pb-6">
+                          <CardTitle className="text-3xl font-headline tracking-tight">{selectedRecipe.title}</CardTitle>
+                          <Button 
+                            variant="ghost" 
+                            size="icon" 
+                            className="rounded-full hover:bg-primary/20"
+                            onClick={() => toggleFavorite(selectedRecipe)}
+                          >
+                            <Heart className={cn("w-6 h-6 transition-all", isFavorite(selectedRecipe) ? "fill-red-500 text-red-500 scale-110" : "text-muted-foreground")} />
+                          </Button>
                         </CardHeader>
-                        <CardContent className="space-y-8 px-6 pb-8">
+                        <CardContent className="space-y-10">
                           <div className="grid md:grid-cols-2 gap-8">
-                            <div>
-                              <h3 className="text-xl font-semibold mb-3 flex items-center gap-2 font-headline"><LeafyGreen className="text-primary-foreground"/>{t.ingredients}</h3>
-                              <ScrollArea className="h-48">
-                                <ul className="list-disc list-inside space-y-1.5 text-muted-foreground bg-muted/30 p-4 rounded-md border border-border/30">
-                                  {selectedRecipe.ingredients.map((ing, i) => <li key={i}>{ing}</li>)}
-                                </ul>
-                              </ScrollArea>
+                            <div className="space-y-4">
+                              <h3 className="text-xl font-bold flex items-center gap-2 font-headline border-b pb-2">
+                                <LeafyGreen className="text-primary-foreground" size={20}/>
+                                {t.ingredients}
+                              </h3>
+                              <ul className="grid grid-cols-1 gap-2 bg-muted/20 p-4 rounded-xl border border-border/40">
+                                {selectedRecipe.ingredients.map((ing, i) => (
+                                  <li key={i} className="flex items-center gap-2 text-sm text-foreground/80">
+                                    <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                                    {ing}
+                                  </li>
+                                ))}
+                              </ul>
                             </div>
-                            <div>
-                              <h3 className="text-xl font-semibold mb-3 flex items-center gap-2 font-headline"><GlassWater className="text-primary-foreground"/>{t.nutritionalSummary}</h3>
-                              {isFetchingNutrition ? (
-                                <div className="space-y-2 pt-2">
-                                  <Skeleton className="h-4 w-full bg-muted/80" />
-                                  <Skeleton className="h-4 w-full bg-muted/80" />
-                                  <Skeleton className="h-4 w-3/4 bg-muted/80" />
-                                </div>
-                              ) : (
-                                <p className="text-muted-foreground">{nutritionalInfo || t.noNutrition}</p>
-                              )}
+                            <div className="space-y-4">
+                              <h3 className="text-xl font-bold flex items-center gap-2 font-headline border-b pb-2">
+                                <GlassWater className="text-primary-foreground" size={20}/>
+                                {t.nutritionalSummary}
+                              </h3>
+                              <div className="p-4 bg-primary/5 rounded-xl border border-primary/10 min-h-[100px]">
+                                {isFetchingNutrition ? (
+                                  <div className="space-y-2">
+                                    <Skeleton className="h-4 w-full" />
+                                    <Skeleton className="h-4 w-5/6" />
+                                    <Skeleton className="h-4 w-4/6" />
+                                  </div>
+                                ) : (
+                                  <p className="text-sm leading-relaxed text-muted-foreground italic">
+                                    {nutritionalInfo || t.noNutrition}
+                                  </p>
+                                )}
+                              </div>
                             </div>
                           </div>
-                          <Separator />
-                          <div>
-                            <h3 className="text-xl font-semibold mb-3 flex items-center gap-2 font-headline"><Utensils className="text-primary-foreground"/>{t.instructions}</h3>
-                            <div className="prose prose-neutral dark:prose-invert max-w-none">
-                              <ol>
-                                {selectedRecipe.instructions.map((step, i) => <li key={i}>{step}</li>)}
+                          
+                          <div className="space-y-6">
+                            <h3 className="text-xl font-bold flex items-center gap-2 font-headline border-b pb-2">
+                              <Utensils className="text-primary-foreground" size={20}/>
+                              {t.instructions}
+                            </h3>
+                            <div className="prose prose-neutral dark:prose-invert max-w-none prose-sm sm:prose-base">
+                              <ol className="space-y-4 marker:text-primary marker:font-bold">
+                                {selectedRecipe.instructions.map((step, i) => (
+                                  <li key={i} className="pl-2">
+                                    <p className="text-foreground/90">{step}</p>
+                                  </li>
+                                ))}
                               </ol>
                             </div>
                           </div>
@@ -485,9 +611,8 @@ export function FridgeChefClient() {
                       </Card>
                     </motion.div>
                   )}
-                  </AnimatePresence>
-                </div>
-              </motion.div>
+                </AnimatePresence>
+              </div>
             )}
           </AnimatePresence>
         </main>
