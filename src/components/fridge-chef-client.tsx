@@ -15,7 +15,8 @@ import { Input } from '@/components/ui/input';
 import { AnimatePresence, motion } from 'framer-motion';
 import { 
   ChefHat, CookingPot, GlassWater, LeafyGreen, Loader2, Utensils, 
-  Sparkles, BookOpen, Globe, Heart, CloudSun, Smile, CalendarDays, PartyPopper 
+  Sparkles, BookOpen, Globe, Heart, CloudSun, Smile, CalendarDays, PartyPopper,
+  Clock
 } from 'lucide-react';
 import {
   Select,
@@ -57,7 +58,11 @@ const translations = {
     rainy: "Rainy",
     cold: "Cold",
     hot: "Hot",
-    festivalPlaceholder: "e.g., Diwali, Christmas..."
+    festivalPlaceholder: "e.g., Diwali, Christmas...",
+    mealTime: "Meal Time",
+    breakfast: "Breakfast",
+    lunch: "Lunch",
+    dinner: "Dinner"
   },
   es: {
     whatsInYourFridge: "¿Qué hay en tu nevera?",
@@ -86,7 +91,11 @@ const translations = {
     sunny: "Soleado",
     rainy: "Lluvioso",
     cold: "Frío",
-    hot: "Calor"
+    hot: "Calor",
+    mealTime: "Hora de Comer",
+    breakfast: "Desayuno",
+    lunch: "Almuerzo",
+    dinner: "Cena"
   },
   fr: {
     whatsInYourFridge: "Qu'y a-t-il dans votre frigo ?",
@@ -115,7 +124,11 @@ const translations = {
     sunny: "Ensoleillé",
     rainy: "Pluvieux",
     cold: "Froid",
-    hot: "Chaud"
+    hot: "Chaud",
+    mealTime: "Moment du Repas",
+    breakfast: "Petit Déjeuner",
+    lunch: "Déjeuner",
+    dinner: "Dîner"
   },
   hi: {
     whatsInYourFridge: "आपके फ्रिज में क्या है?",
@@ -141,7 +154,11 @@ const translations = {
     sunny: "धूप",
     rainy: "बरसात",
     cold: "ठंड",
-    hot: "गर्मी"
+    hot: "गर्मी",
+    mealTime: "भोजन का समय",
+    breakfast: "नाश्ता",
+    lunch: "दोपहर का भोजन",
+    dinner: "रात का खाना"
   },
   gu: {
     whatsInYourFridge: "તમારા ફ્રિજમાં શું છે?",
@@ -165,7 +182,11 @@ const translations = {
     sunny: "તડકો",
     rainy: "વરસાદ",
     cold: "ઠંડી",
-    hot: "ગરમી"
+    hot: "ગરમી",
+    mealTime: "જમવાનો સમય",
+    breakfast: "નાસ્તો",
+    lunch: "બપોરનું ભોજન",
+    dinner: "રાત્રિનું ભોજન"
   },
   ta: {
     whatsInYourFridge: "உங்கள் பிரிட்ஜில் என்ன இருக்கிறது?",
@@ -188,7 +209,11 @@ const translations = {
     sunny: "வெயில்",
     rainy: "மழை",
     cold: "குளிர்",
-    hot: "வெப்பம்"
+    hot: "வெப்பம்",
+    mealTime: "உணவு நேரம்",
+    breakfast: "காலை உணவு",
+    lunch: "மதிய உணவு",
+    dinner: "இரவு உணவு"
   },
   or: {
     whatsInYourFridge: "ଆପଣଙ୍କ ଫ୍ରିଜରେ କ'ଣ ଅଛି?",
@@ -210,15 +235,19 @@ const translations = {
     calm: "ଶାନ୍ତ",
     sunny: "ଖରା",
     rainy: "ବର୍ଷା",
-    cold: "ଥଣ୍ଡା",
-    hot: "ଗରମ"
+    cold: "ଥଣ୍ડા",
+    hot: "ଗରମ",
+    mealTime: "ଭୋଜନ ସମୟ",
+    breakfast: "ଜଳଖିଆ",
+    lunch: "ମଧ୍ୟାହ୍ନ ଭୋଜନ",
+    dinner: "ରାତ୍ରି ଭୋଜନ"
   },
   pa: {
     whatsInYourFridge: "ਤੁਹਾਡੇ ਫਰਿੱਜ ਵਿੱਚ ਕੀ ਹੈ?",
     generateRecipes: "ਵਿਅੰਜਨ ਬਣਾਓ",
     welcome: "FridgeChef ਵਿੱਚ ਸੁਆਗਤ ਹੈ!",
     recipeIdeas: "ਵਿਅੰਜਨ ਵਿਚਾਰ",
-    ingredients: "ਸਮੱਗરી",
+    ingredients: "ਸਮੱਗரி",
     nutritionalSummary: "ਪੋਸ਼ਣ ਸੰਬੰਧੀ ਸਾਰ",
     instructions: "ਹਦਾਇਤਾਂ",
     language: "ਭਾਸ਼ਾ",
@@ -234,7 +263,11 @@ const translations = {
     sunny: "ਧੁੱਪ",
     rainy: "ਮੀਂਹ",
     cold: "ਠੰਡ",
-    hot: "ਗਰਮੀ"
+    hot: "ਗਰਮੀ",
+    mealTime: "ਭੋਜਨ ਦਾ ਸਮਾਂ",
+    breakfast: "ਨਾਸ਼ਤਾ",
+    lunch: "ਦੁਪਹਿਰ ਦਾ ਖਾਣਾ",
+    dinner: "ਰਾਤ ਦਾ ਖਾਣਾ"
   },
   ur: {
     whatsInYourFridge: "آپ کے فریج میں کیا ہے؟",
@@ -257,7 +290,11 @@ const translations = {
     sunny: "دھوپ",
     rainy: "بارش",
     cold: "سردی",
-    hot: "گرمی"
+    hot: "گرمی",
+    mealTime: "کھانے کا وقت",
+    breakfast: "ناشتہ",
+    lunch: "دوپہر کا کھانا",
+    dinner: "رات کا کھانا"
   }
 };
 
@@ -406,13 +443,28 @@ export function FridgeChefClient() {
                       </div>
                     </div>
 
-                    <div className="space-y-1">
-                      <label className="text-xs font-medium flex items-center gap-1"><PartyPopper size={12}/>{t.festival}</label>
-                      <Input 
-                        name="festival" 
-                        placeholder={t.festivalPlaceholder || "Occasion"} 
-                        className="h-9 text-xs"
-                      />
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="space-y-1">
+                        <label className="text-xs font-medium flex items-center gap-1"><Clock size={12}/>{t.mealTime}</label>
+                        <Select name="mealType" defaultValue="lunch">
+                          <SelectTrigger className="h-9 text-xs">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="breakfast">{t.breakfast}</SelectItem>
+                            <SelectItem value="lunch">{t.lunch}</SelectItem>
+                            <SelectItem value="dinner">{t.dinner}</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div className="space-y-1">
+                        <label className="text-xs font-medium flex items-center gap-1"><PartyPopper size={12}/>{t.festival}</label>
+                        <Input 
+                          name="festival" 
+                          placeholder={t.festivalPlaceholder || "Occasion"} 
+                          className="h-9 text-xs"
+                        />
+                      </div>
                     </div>
                     
                     <input type="hidden" name="day" value={new Date().toLocaleDateString('en-US', { weekday: 'long' })} />
@@ -431,7 +483,7 @@ export function FridgeChefClient() {
                           <SelectItem value="hi">हिन्दी</SelectItem>
                           <SelectItem value="gu">ગુજરાતી</SelectItem>
                           <SelectItem value="ta">தமிழ்</SelectItem>
-                          <SelectItem value="or">ଓଡ଼ିଆ</SelectItem>
+                          <SelectItem value="or">ଓଡ଼િଆ</SelectItem>
                           <SelectItem value="pa">ਪੰਜਾਬੀ</SelectItem>
                           <SelectItem value="ur">اردو</SelectItem>
                         </SelectContent>

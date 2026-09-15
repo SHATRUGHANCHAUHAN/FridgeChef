@@ -1,7 +1,7 @@
 'use server';
 
 /**
- * @fileOverview Generates recipes based on ingredients and contextual factors like mood and weather.
+ * @fileOverview Generates recipes based on ingredients and contextual factors like mood, weather, and meal type.
  *
  * - generateRecipes - A function that takes ingredients and context to return recipes.
  * - GenerateRecipesInput - The input type for the generateRecipes function.
@@ -20,6 +20,7 @@ const GenerateRecipesInputSchema = z.object({
   weather: z.string().describe("The current weather (e.g., Rainy, Sunny).").optional(),
   day: z.string().describe("The current day of the week.").optional(),
   festival: z.string().describe("Any special occasion or festival.").optional(),
+  mealType: z.string().describe("The type of meal (e.g., Breakfast, Lunch, Dinner).").optional(),
 });
 export type GenerateRecipesInput = z.infer<typeof GenerateRecipesInputSchema>;
 
@@ -45,6 +46,7 @@ const prompt = ai.definePrompt({
   Given the following ingredients, suggest a list of recipes. 
   
   **Contextual Personalization:**
+  - **Meal Type:** {{{mealType}}} (Crucial: Suggest appropriate food for this time of day)
   - **Mood:** {{{mood}}} (Suggest food that complements or improves this mood)
   - **Weather:** {{{weather}}} (Suggest comfort food for cold/rainy, light food for hot/sunny)
   - **Day:** {{{day}}} (Consider quick meals for weekdays or more involved ones for weekends)

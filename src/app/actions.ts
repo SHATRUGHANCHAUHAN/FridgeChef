@@ -18,6 +18,7 @@ const GenerateRecipesActionSchema = z.object({
   weather: z.string().optional(),
   day: z.string().optional(),
   festival: z.string().optional(),
+  mealType: z.string().optional(),
 });
 
 type GenerateRecipesActionResult = 
@@ -35,6 +36,7 @@ export async function generateRecipesAction(
     weather: formData.get('weather'),
     day: formData.get('day'),
     festival: formData.get('festival'),
+    mealType: formData.get('mealType'),
   });
 
   if (!validatedFields.success) {
