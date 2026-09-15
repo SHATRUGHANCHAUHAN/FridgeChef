@@ -35,7 +35,7 @@ const translations = {
     generateRecipes: "Generate Recipes",
     startNewSearch: "Start New Search",
     craftingCulinary: "Crafting your culinary creations...",
-    aiChefWorking: "Our AI chef is looking through the pantry. Your recipes will be ready soon!",
+    aiChefWorking: "Our chef is looking through the pantry. Your recipes will be ready soon!",
     welcome: "Welcome to FridgeChef!",
     welcomeSub: "Enter ingredients, mood, and weather to get personalized recipe ideas.",
     recipeIdeas: "Recipe Ideas",

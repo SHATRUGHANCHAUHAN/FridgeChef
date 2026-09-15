@@ -6,15 +6,17 @@ FridgeChef is a modern, AI-powered recipe generator that helps you create delici
 
 - **AI-Powered Recipe Generation:** Instantly creates recipes tailored to your available ingredients.
 - **Kitchen Vibe™ Personalization:** Adjusts suggestions based on your mood (Happy, Tired, etc.), weather (Sunny, Rainy, etc.), and even local festivals.
+- **Meal Timing:** Choose between Breakfast, Lunch, or Dinner for time-appropriate suggestions.
+- **AI Meal Visualization:** Real-time image generation for every recipe using Imagen 3.
 - **Multilingual Experience:** Full support for English, Español, Français, हिन्दी, ગુજરાતી, தமிழ், ଓଡ଼ିଆ, ਪੰਜਾਬੀ, and اردو.
 - **Health Insights:** Automated nutritional summaries for every generated recipe.
-- **Favorites:** Save and manage your favorite culinary discoveries.
+- **Favorites:** Save and manage your favorite culinary discoveries with a single click.
 - **Modern UI/UX:** A clean, responsive interface with smooth animations and professional styling.
 
 ## 🛠️ Tech Stack
 
 - **Framework:** [Next.js 15](https://nextjs.org/) (App Router)
-- **AI Engine:** [Firebase Genkit](https://firebase.google.com/docs/genkit) with Gemini 2.0
+- **AI Engine:** [Firebase Genkit](https://firebase.google.com/docs/genkit) with Gemini 2.0 & Imagen 3
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/)
 - **UI Components:** [Shadcn UI](https://ui.shadcn.com/)
 - **Animations:** [Framer Motion](https://www.framer.com/motion/)
@@ -54,10 +56,10 @@ FridgeChef is a modern, AI-powered recipe generator that helps you create delici
 
 ## 📱 Project Structure
 
-- `src/ai`: Genkit flows and AI prompt definitions.
-- `src/app`: Next.js pages and Server Actions.
-- `src/components`: Reusable UI components and the main client dashboard.
-- `src/hooks`: Custom React hooks for UI state and responsiveness.
+- `src/ai`: Genkit flows, prompts, and AI configuration.
+- `src/app`: Next.js pages, layouts, and Server Actions.
+- `src/components`: Reusable UI components and the main client-side logic.
+- `src/hooks`: Custom React hooks for responsiveness and state management.
 
 ## 📄 License
 
