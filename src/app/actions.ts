@@ -29,6 +29,18 @@ type GenerateRecipesActionResult =
   | { success: true; data: GenerateRecipesOutput }
   | { success: false; error: string };
 
+const languageMap: Record<string, string> = {
+  en: 'English',
+  es: 'Spanish',
+  fr: 'French',
+  hi: 'Hindi',
+  gu: 'Gujarati',
+  ta: 'Tamil',
+  or: 'Odia',
+  pa: 'Punjabi',
+  ur: 'Urdu'
+};
+
 export async function generateRecipesAction(
   prevState: any,
   formData: FormData
@@ -51,7 +63,11 @@ export async function generateRecipesAction(
   }
 
   try {
-    const recipes = await generateRecipes(validatedFields.data);
+    const inputData = {
+      ...validatedFields.data,
+      language: languageMap[validatedFields.data.language] || 'English'
+    };
+    const recipes = await generateRecipes(inputData);
     if (recipes.length === 0) {
       return { success: false, error: 'Could not generate recipes. Try different ingredients or context.' };
     }
@@ -70,7 +86,11 @@ export async function summarizeNutritionalInfoAction(
   input: SummarizeNutritionalInformationInput
 ): Promise<SummarizeNutritionalInfoActionResult> {
   try {
-    const result = await summarizeNutritionalInformation(input);
+    const resolvedLanguage = languageMap[input.language || 'en'] || input.language || 'English';
+    const result = await summarizeNutritionalInformation({
+      ...input,
+      language: resolvedLanguage
+    });
     return { success: true, data: result.summary };
   } catch (error: any) {
     console.error('Error summarizing nutritional info:', error);

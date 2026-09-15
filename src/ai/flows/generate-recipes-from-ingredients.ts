@@ -54,7 +54,7 @@ const prompt = ai.definePrompt({
 
   For each recipe, provide detailed, step-by-step instructions. Return instructions as a list of strings.
 
-  Generate the entire response in the following language: {{{language}}}.
+  CRITICAL LOCALIZATION REQUIREMENT: You must generate the entire response, including all recipe titles, every ingredient item name, and every single step of the instructions, natively and completely in the following language: {{{language}}}. Do not mix English words into the instructions or ingredients list.
 
   Ingredients: {{{ingredients}}}
 
