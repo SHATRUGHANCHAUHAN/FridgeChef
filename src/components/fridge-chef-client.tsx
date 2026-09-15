@@ -23,7 +23,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
 import { cn } from '@/lib/utils';
 
 type Recipe = GenerateRecipesOutput[0];
@@ -206,7 +206,7 @@ const translations = {
     startNewSearch: "புதிய தேடல்",
     craftingCulinary: "உங்கள் சமையல் குறிப்புகள் தயாராகின்றன...",
     aiChefWorking: "எங்கள் AI செஃப் சமையலறையைச் சோதிக்கிறார். சமையல் குறிப்புகள் விரைவில் தயாராகும்!",
-    welcome: "FridgeChefக்கு வரவேற்கிறோம்!",
+    welcome: "FridgeChefக்கு வரவேக்கிரோம்!",
     welcomeSub: "தனிப்பயனாக்கப்பட்ட யோசனைகளுக்கு பொருட்கள், மனநிலை மற்றும் வானிலையை உள்ளிடவும்.",
     recipeIdeas: "சமையல் யோசனைகள்",
     ingredients: "பொருட்கள்",
@@ -258,7 +258,7 @@ const translations = {
     energetic: "ଉତ୍ସାହୀ",
     calm: "ଶାନ୍ତ",
     sunny: "ଖରା",
-    rainy: "ବର୍ଷା",
+    rainy: "ବର୍ଷا",
     cold: "ଥଣ୍ଡା",
     hot: "ଗରମ",
     festivalPlaceholder: "ଯେପରିକି, ଦୀପାବଳି...",
@@ -347,8 +347,13 @@ export function FridgeChefClient() {
   const [recipeImage, setRecipeImage] = useState<string | null>(null);
   const [isFetchingNutrition, setIsFetchingNutrition] = useState(false);
   const [isFetchingImage, setIsFetchingImage] = useState(false);
-  const [formKey, setFormKey] = useState(Date.now());
+  const [formKey, setFormKey] = useState(1);
   const [favorites, setFavorites] = useState<Recipe[]>([]);
+  const [clientDay, setClientDay] = useState<string>('Monday');
+
+  useEffect(() => {
+    setClientDay(new Date().toLocaleDateString('en-US', { weekday: 'long' }));
+  }, []);
 
   const [generateRecipesState, formAction, isPending] = useActionState(generateRecipesAction, null);
 
@@ -427,7 +432,7 @@ export function FridgeChefClient() {
     setSelectedRecipe(null);
     setNutritionalInfo(null);
     setRecipeImage(null);
-    setFormKey(Date.now());
+    setFormKey(prev => prev + 1);
   };
 
   const toggleFavorite = (recipe: Recipe) => {
@@ -536,7 +541,7 @@ export function FridgeChefClient() {
                       </div>
                     </div>
                     
-                    <input type="hidden" name="day" value={new Date().toLocaleDateString('en-US', { weekday: 'long' })} />
+                    <input type="hidden" name="day" value={clientDay} />
                     <input type="hidden" name="language" value={language} />
 
                     <div className="space-y-1">
