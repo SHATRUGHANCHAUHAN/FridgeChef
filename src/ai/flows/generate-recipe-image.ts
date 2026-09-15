@@ -27,7 +27,7 @@ const generateRecipeImageFlow = ai.defineFlow(
   },
   async input => {
     const { media } = await ai.generate({
-      model: 'googleai/imagen-3',
+      model: 'googleai/imagen-3.0-generate-001',
       prompt: `A professional, high-resolution food photography shot of ${input.recipeName}. Beautifully plated, delicious looking, cinematic studio lighting, high detail, vibrant culinary colors.`,
     });
 
