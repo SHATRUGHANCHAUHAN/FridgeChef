@@ -181,7 +181,7 @@ const translations = {
     noNutrition: "કોઈ પોષણ માહિતી ઉપલબ્ધ નથી.",
     language: "ભાષા",
     favorites: "મનપસંદ",
-    kitchenVibe: "রসওડું વાઇબ",
+    kitchenVibe: "રસોડું વાઇબ",
     mood: "મૂડ",
     weather: "હવામાન",
     festival: "તહેવાર / પ્રસંગ",
@@ -236,10 +236,10 @@ const translations = {
   or: {
     whatsInYourFridge: "ଆପଣଙ୍କ ଫ୍ରିଜରେ କ'ଣ ଅଛି?",
     placeholder: "ଯେପରିକି, ଭାତ, ଆଳୁ...",
-    generateRecipes: "ରେସିପି ପ୍ରସ୍ତուତ କରନ୍ତု",
+    generateRecipes: "ରେସିପି ପ୍ରସ୍ତୁତ କରନ୍ତୁ",
     startNewSearch: "ନୂତନ ସନ୍ଧାନ",
     craftingCulinary: "ଆପଣଙ୍କ ପାଇଁ ରେସିପି ପ୍ରସ୍ତୁତ ହେଉଛି...",
-    aiChefWorking: "ଆମର AI ରୋଷେଇଆ କାମ କରୁଛନ୍ତି, ଶୀଘ୍ର ପ୍ରସ୍ତուତ ହୋଇଯିବ!",
+    aiChefWorking: "ଆମର AI ରୋଷେଇଆ କାମ କରୁଛନ୍ତି, ଶୀଘ୍ର ପ୍ରସ୍ତୁତ ହୋଇଯିବ!",
     welcome: "FridgeChef କୁ ସ୍ୱାଗତ!",
     welcomeSub: "ନିଜ ପସନ୍ଦର ରେସିପି ପାଇଁ ସାମଗ୍ରୀ, ମନୋଭାବ ଏବଂ ପାଣିପାଗ ଦିଅନ୍ତୁ।",
     recipeIdeas: "ରେସିପି ଆଇଡିଆ",
@@ -255,14 +255,14 @@ const translations = {
     festival: "ପର୍ବ / ଅବସର",
     happy: "ଖୁସି",
     tired: "ଥକିଯାଇଥିବା",
-    energetic: "ଉତ୍ସାਹୀ",
+    energetic: "ଉତ୍ସାହୀ",
     calm: "ଶାନ୍ତ",
     sunny: "ଖରା",
     rainy: "ବର୍ଷା",
-    cold: "ଥଣ୍ଡา",
+    cold: "ଥଣ୍ଡା",
     hot: "ଗରମ",
     festivalPlaceholder: "ଯେପରିକି, ଦୀପାବଳି...",
-    mealTime: "ଭୋਜନ ସମୟ",
+    mealTime: "ଭୋଜନ ସମୟ",
     breakfast: "ଜଳଖିଆ",
     lunch: "ମଧ୍ୟାହ୍ନ ଭୋଜନ",
     dinner: "ରାତ୍ରି ଭୋଜନ"
@@ -329,7 +329,7 @@ const translations = {
     rainy: "بارش",
     cold: "سردی",
     hot: "گرمی",
-    festivalPlaceholder: "مثال کے طور پر، عید...",
+    festivalPlaceholder: "مثال کے طور پر, عید...",
     mealTime: "کھانے کا وقت",
     breakfast: "ناشتہ",
     lunch: "دوپہر کا کھانا",
@@ -457,7 +457,7 @@ export function FridgeChefClient() {
             transition={{ duration: 0.5 }}
             className="sticky top-8 space-y-6"
           >
-            <Card className="bg-card/70 border-border/50 shadow-lg">
+            <Card className="bg-card/70 border-border/50 shadow-lg backdrop-blur-sm">
               <CardHeader className="pb-4">
                 <CardTitle className="flex items-center gap-2 font-headline text-xl">
                   <ChefHat size={24} className="text-primary-foreground" />
@@ -483,9 +483,9 @@ export function FridgeChefClient() {
 
                     <div className="grid grid-cols-2 gap-3">
                       <div className="space-y-1">
-                        <label className="text-xs font-medium flex items-center gap-1"><Smile size={12}/>{t.mood}</label>
+                        <label className="text-xs font-medium flex items-center gap-1 text-muted-foreground"><Smile size={12}/>{t.mood}</label>
                         <Select name="mood" defaultValue="calm">
-                          <SelectTrigger className="h-9 text-xs">
+                          <SelectTrigger className="h-9 text-xs bg-background/50">
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
@@ -497,9 +497,9 @@ export function FridgeChefClient() {
                         </Select>
                       </div>
                       <div className="space-y-1">
-                        <label className="text-xs font-medium flex items-center gap-1"><CloudSun size={12}/>{t.weather}</label>
+                        <label className="text-xs font-medium flex items-center gap-1 text-muted-foreground"><CloudSun size={12}/>{t.weather}</label>
                         <Select name="weather" defaultValue="sunny">
-                          <SelectTrigger className="h-9 text-xs">
+                          <SelectTrigger className="h-9 text-xs bg-background/50">
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
@@ -514,9 +514,9 @@ export function FridgeChefClient() {
 
                     <div className="grid grid-cols-2 gap-3">
                       <div className="space-y-1">
-                        <label className="text-xs font-medium flex items-center gap-1"><Clock size={12}/>{t.mealTime}</label>
+                        <label className="text-xs font-medium flex items-center gap-1 text-muted-foreground"><Clock size={12}/>{t.mealTime}</label>
                         <Select name="mealType" defaultValue="lunch">
-                          <SelectTrigger className="h-9 text-xs">
+                          <SelectTrigger className="h-9 text-xs bg-background/50">
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
@@ -527,11 +527,11 @@ export function FridgeChefClient() {
                         </Select>
                       </div>
                       <div className="space-y-1">
-                        <label className="text-xs font-medium flex items-center gap-1"><PartyPopper size={12}/>{t.festival}</label>
+                        <label className="text-xs font-medium flex items-center gap-1 text-muted-foreground"><PartyPopper size={12}/>{t.festival}</label>
                         <Input 
                           name="festival" 
                           placeholder={t.festivalPlaceholder || "Occasion"} 
-                          className="h-9 text-xs"
+                          className="h-9 text-xs bg-background/50"
                         />
                       </div>
                     </div>
@@ -540,9 +540,9 @@ export function FridgeChefClient() {
                     <input type="hidden" name="language" value={language} />
 
                     <div className="space-y-1">
-                      <label className="text-xs font-medium flex items-center gap-1"><Globe size={12}/>{t.language}</label>
+                      <label className="text-xs font-medium flex items-center gap-1 text-muted-foreground"><Globe size={12}/>{t.language}</label>
                       <Select onValueChange={(value: keyof typeof translations) => setLanguage(value)} defaultValue={language}>
-                        <SelectTrigger className="h-9 text-xs">
+                        <SelectTrigger className="h-9 text-xs bg-background/50">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
@@ -552,7 +552,7 @@ export function FridgeChefClient() {
                           <SelectItem value="hi">हिन्दी</SelectItem>
                           <SelectItem value="gu">ગુજરાતી</SelectItem>
                           <SelectItem value="ta">தமிழ்</SelectItem>
-                          <SelectItem value="or">ଓଡ଼િଆ</SelectItem>
+                          <SelectItem value="or">ଓଡ଼ିଆ</SelectItem>
                           <SelectItem value="pa">ਪੰਜਾਬੀ</SelectItem>
                           <SelectItem value="ur">اردو</SelectItem>
                         </SelectContent>
@@ -560,13 +560,13 @@ export function FridgeChefClient() {
                     </div>
                   </div>
 
-                  <Button type="submit" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-bold" disabled={isPending}>
-                    {isPending ? <Loader2 className="animate-spin" /> : <Sparkles className="mr-2" />}
+                  <Button type="submit" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-bold shadow-md transition-all active:scale-[0.98]" disabled={isPending}>
+                    {isPending ? <Loader2 className="animate-spin" /> : <Sparkles className="mr-2" size={18} />}
                     {t.generateRecipes}
                   </Button>
                 </form>
                 {recipes && (
-                   <Button variant="ghost" className="w-full text-xs" onClick={handleNewSearch}>
+                   <Button variant="ghost" className="w-full text-xs text-muted-foreground hover:text-foreground" onClick={handleNewSearch}>
                      {t.startNewSearch}
                    </Button>
                 )}
@@ -574,21 +574,24 @@ export function FridgeChefClient() {
             </Card>
 
             {favorites.length > 0 && (
-              <Card className="bg-card/70 border-border/50 shadow-md">
+              <Card className="bg-card/70 border-border/50 shadow-md backdrop-blur-sm">
                 <CardHeader className="py-3">
-                  <CardTitle className="flex items-center gap-2 text-md">
-                    <Heart size={18} className="text-primary-foreground" />
+                  <CardTitle className="flex items-center gap-2 text-md font-headline">
+                    <Heart size={18} className="text-primary-foreground fill-primary-foreground/20" />
                     {t.favorites}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="px-3 pb-3">
-                  <ScrollArea className="h-[120px]">
+                  <ScrollArea className="h-[150px]">
                     <div className="space-y-1">
                       {favorites.map((fav, index) => (
                         <Button
                           key={index}
                           variant="ghost"
-                          className="w-full justify-start text-xs h-8 px-2"
+                          className={cn(
+                            "w-full justify-start text-xs h-9 px-3 rounded-lg transition-colors",
+                            selectedRecipe?.title === fav.title ? "bg-primary/10 text-primary-foreground font-bold" : "text-muted-foreground hover:bg-muted"
+                          )}
                           onClick={() => setSelectedRecipe(fav)}
                         >
                           <span className="truncate">{fav.title}</span>
@@ -607,31 +610,33 @@ export function FridgeChefClient() {
             {isPending && !recipes ? (
               <motion.div
                 key="loading"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
                 className="flex flex-col items-center justify-center h-[500px] border-2 border-dashed border-border/30 rounded-2xl text-center"
               >
                 <Loader2 className="h-12 w-12 animate-spin text-primary mb-4" />
-                <h3 className="text-xl font-bold">{t.craftingCulinary}</h3>
-                <p className="text-muted-foreground mt-2">{t.aiChefWorking}</p>
+                <h3 className="text-xl font-bold font-headline">{t.craftingCulinary}</h3>
+                <p className="text-muted-foreground mt-2 max-w-sm px-4">{t.aiChefWorking}</p>
               </motion.div>
             ) : !recipes ? (
               <motion.div
                 key="welcome"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="flex flex-col items-center justify-center h-[500px] border-2 border-dashed border-border/30 rounded-2xl text-center p-8"
+                className="flex flex-col items-center justify-center h-[500px] border-2 border-dashed border-border/30 rounded-2xl text-center p-8 bg-muted/5"
               >
-                <CookingPot className="h-16 w-16 text-muted-foreground mb-4 opacity-50" />
-                <h2 className="text-2xl font-bold">{t.welcome}</h2>
-                <p className="text-muted-foreground mt-2 max-w-md">{t.welcomeSub}</p>
+                <div className="bg-primary/10 p-4 rounded-full mb-6">
+                  <CookingPot className="h-16 w-16 text-primary opacity-80" />
+                </div>
+                <h2 className="text-3xl font-bold font-headline mb-2">{t.welcome}</h2>
+                <p className="text-muted-foreground mt-2 max-w-md text-lg">{t.welcomeSub}</p>
               </motion.div>
             ) : (
               <div className="space-y-6">
-                <Card className="bg-card/70 border-border/50 shadow-sm overflow-hidden">
-                  <CardHeader className="bg-muted/30 py-4">
-                    <CardTitle className="text-lg flex items-center gap-2">
+                <Card className="bg-card/70 border-border/50 shadow-sm overflow-hidden backdrop-blur-sm">
+                  <CardHeader className="bg-muted/30 py-4 border-b">
+                    <CardTitle className="text-lg flex items-center gap-2 font-headline">
                       <BookOpen size={20} className="text-primary-foreground" />
                       {t.recipeIdeas}
                     </CardTitle>
@@ -643,8 +648,10 @@ export function FridgeChefClient() {
                           key={index}
                           variant={selectedRecipe?.title === recipe.title ? "default" : "outline"}
                           className={cn(
-                            "rounded-full transition-all text-sm",
-                            selectedRecipe?.title === recipe.title ? "bg-primary text-primary-foreground shadow-md" : "hover:bg-primary/10"
+                            "rounded-full transition-all text-sm font-medium",
+                            selectedRecipe?.title === recipe.title 
+                              ? "bg-primary text-primary-foreground shadow-lg scale-105" 
+                              : "hover:bg-primary/10 border-border/50"
                           )}
                           onClick={() => setSelectedRecipe(recipe)}
                         >
@@ -659,72 +666,75 @@ export function FridgeChefClient() {
                   {selectedRecipe && (
                     <motion.div
                       key={selectedRecipe.title}
-                      initial={{ opacity: 0, y: 10 }}
+                      initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, scale: 0.98 }}
-                      transition={{ duration: 0.3 }}
+                      transition={{ type: 'spring', damping: 25, stiffness: 300 }}
                     >
-                      <Card className="bg-card/70 border-border/50 shadow-md">
-                        <CardHeader className="flex flex-row items-center justify-between pb-6">
-                          <CardTitle className="text-3xl font-headline tracking-tight">{selectedRecipe.title}</CardTitle>
+                      <Card className="bg-card border-border/50 shadow-xl overflow-hidden">
+                        <CardHeader className="flex flex-row items-center justify-between pb-6 border-b bg-muted/5">
+                          <CardTitle className="text-3xl sm:text-4xl font-headline tracking-tight text-foreground">{selectedRecipe.title}</CardTitle>
                           <Button 
                             variant="ghost" 
                             size="icon" 
-                            className="rounded-full hover:bg-primary/20"
+                            className="rounded-full hover:bg-primary/20 w-12 h-12"
                             onClick={() => toggleFavorite(selectedRecipe)}
                           >
-                            <Heart className={cn("w-6 h-6 transition-all", isFavorite(selectedRecipe) ? "fill-red-500 text-red-500 scale-110" : "text-muted-foreground")} />
+                            <Heart className={cn("w-7 h-7 transition-all", isFavorite(selectedRecipe) ? "fill-red-500 text-red-500 scale-110" : "text-muted-foreground")} />
                           </Button>
                         </CardHeader>
-                        <CardContent className="space-y-10">
-                          <div className="relative w-full h-[320px] rounded-xl overflow-hidden bg-muted/30 border border-border/40 shadow-inner flex items-center justify-center">
+                        <CardContent className="space-y-10 p-6 sm:p-10">
+                          <div className="relative w-full h-[320px] sm:h-[450px] rounded-2xl overflow-hidden bg-muted/30 border border-border/40 shadow-2xl flex items-center justify-center group">
                             {isFetchingImage ? (
-                              <div className="flex flex-col items-center gap-2">
-                                <Loader2 className="h-8 w-8 animate-spin text-primary-foreground" />
-                                <p className="text-xs text-muted-foreground animate-pulse">Generating meal image...</p>
+                              <div className="flex flex-col items-center gap-4">
+                                <Loader2 className="h-10 w-10 animate-spin text-primary" />
+                                <p className="text-sm font-medium text-muted-foreground animate-pulse tracking-wide uppercase">Visualizing Recipe...</p>
                               </div>
                             ) : recipeImage ? (
-                              <img 
+                              <motion.img 
+                                initial={{ scale: 1.1 }}
+                                animate={{ scale: 1 }}
                                 src={recipeImage} 
                                 alt={selectedRecipe.title}
-                                className="w-full h-full object-cover rounded-xl transition-all duration-300"
+                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                               />
                             ) : (
-                              <div className="flex flex-col items-center text-muted-foreground/30 gap-2">
-                                <CookingPot size={48} />
+                              <div className="flex flex-col items-center text-muted-foreground/20 gap-2">
+                                <CookingPot size={80} />
                               </div>
                             )}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
                           </div>
 
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div className="space-y-4">
-                              <h3 className="text-xl font-bold flex items-center gap-2 font-headline border-b pb-2">
-                                <LeafyGreen className="text-primary-foreground" size={20}/>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                            <div className="space-y-6">
+                              <h3 className="text-2xl font-bold flex items-center gap-2 font-headline text-foreground">
+                                <LeafyGreen className="text-primary-foreground" size={24}/>
                                 {t.ingredients}
                               </h3>
-                              <ul className="grid grid-cols-1 gap-2 bg-muted/20 p-4 rounded-xl border border-border/40">
+                              <ul className="grid grid-cols-1 gap-3 bg-muted/10 p-6 rounded-2xl border border-border/40 shadow-sm">
                                 {selectedRecipe.ingredients.map((ing, i) => (
-                                  <li key={i} className="flex items-center gap-2 text-sm text-foreground/80">
-                                    <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                                  <li key={i} className="flex items-center gap-3 text-base text-foreground/80">
+                                    <div className="h-2 w-2 rounded-full bg-primary flex-shrink-0" />
                                     {ing}
                                   </li>
                                 ))}
                               </ul>
                             </div>
-                            <div className="space-y-4">
-                              <h3 className="text-xl font-bold flex items-center gap-2 font-headline border-b pb-2">
-                                <GlassWater className="text-primary-foreground" size={20}/>
+                            <div className="space-y-6">
+                              <h3 className="text-2xl font-bold flex items-center gap-2 font-headline text-foreground">
+                                <GlassWater className="text-primary-foreground" size={24}/>
                                 {t.nutritionalSummary}
                               </h3>
-                              <div className="p-4 bg-primary/5 rounded-xl border border-primary/10 min-h-[100px]">
+                              <div className="p-6 bg-primary/5 rounded-2xl border border-primary/10 min-h-[120px] shadow-sm">
                                 {isFetchingNutrition ? (
-                                  <div className="space-y-2">
+                                  <div className="space-y-3">
                                     <Skeleton className="h-4 w-full" />
                                     <Skeleton className="h-4 w-5/6" />
                                     <Skeleton className="h-4 w-4/6" />
                                   </div>
                                 ) : (
-                                  <p className="text-sm leading-relaxed text-muted-foreground italic">
+                                  <p className="text-base leading-relaxed text-muted-foreground italic font-medium">
                                     {nutritionalInfo || t.noNutrition}
                                   </p>
                                 )}
@@ -732,17 +742,28 @@ export function FridgeChefClient() {
                             </div>
                           </div>
                           
-                          <div className="space-y-6">
-                            <h3 className="text-xl font-bold flex items-center gap-2 font-headline border-b pb-2">
-                              <Utensils className="text-primary-foreground" size={20}/>
+                          <Separator />
+                          
+                          <div className="space-y-8">
+                            <h3 className="text-2xl font-bold flex items-center gap-2 font-headline text-foreground">
+                              <Utensils className="text-primary-foreground" size={24}/>
                               {t.instructions}
                             </h3>
                             <div className="prose prose-neutral dark:prose-invert max-w-none">
-                              <ol className="space-y-4 marker:text-primary marker:font-bold">
+                              <ol className="space-y-6 list-none p-0">
                                 {selectedRecipe.instructions.map((step, i) => (
-                                  <li key={i} className="pl-2">
-                                    <p className="text-foreground/90">{step}</p>
-                                  </li>
+                                  <motion.li 
+                                    key={i} 
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: i * 0.1 }}
+                                    className="flex gap-6 items-start group"
+                                  >
+                                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold shadow-md group-hover:scale-110 transition-transform">
+                                      {i + 1}
+                                    </div>
+                                    <p className="text-lg text-foreground/90 pt-1 leading-snug">{step}</p>
+                                  </motion.li>
                                 ))}
                               </ol>
                             </div>

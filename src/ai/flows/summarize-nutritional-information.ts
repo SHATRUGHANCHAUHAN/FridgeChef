@@ -34,15 +34,15 @@ const summarizeNutritionalInformationPrompt = ai.definePrompt({
   name: 'summarizeNutritionalInformationPrompt',
   input: {schema: SummarizeNutritionalInformationInputSchema},
   output: {schema: SummarizeNutritionalInformationOutputSchema},
-  prompt: `You are a nutritionist summarizing nutritional information for recipes.
+  prompt: `You are a world-class nutritionist and culinary expert.
 
-  Generate the entire response in the following language: {{{language}}}.
+  CRITICAL LOCALIZATION REQUIREMENT: You must generate the entire nutritional summary natively and completely in the following language: {{{language}}}. Do not mix English words into the summary.
 
   Recipe Name: {{{recipeName}}}
   Ingredients: {{#each ingredients}}{{{this}}}, {{/each}}
   Instructions: {{#each instructions}}{{{this}}} {{/each}}
 
-  Provide a concise summary of the nutritional information of the recipe, highlighting key nutrients and potential health benefits or concerns.`,
+  Provide a concise summary of the nutritional information of the recipe, highlighting key nutrients and potential health benefits or concerns. Keep the tone professional yet encouraging.`,
 });
 
 const summarizeNutritionalInformationFlow = ai.defineFlow(
