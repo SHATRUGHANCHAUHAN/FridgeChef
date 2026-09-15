@@ -282,7 +282,7 @@ const translations = {
     instructions: "ਤਰੀਕਾ",
     noNutrition: "ਕੋਈ ਪੋਸ਼ਣ ਸੰਬੰਧੀ ਜਾਣਕਾਰੀ ਉਪਲਬਧ ਨਹੀਂ ਹੈ।",
     language: "ਭਾਸ਼ਾ",
-    favorites: "ਮਨਪਸੰદ",
+    favorites: "ਮਨਪਸੰਦ",
     kitchenVibe: "ਕਿਚਨ ਵਾਈਬ",
     mood: "ਮੂਡ",
     weather: "ਮੌਸਮ",
@@ -387,21 +387,18 @@ export function FridgeChefClient() {
           if (nutritionResult.success) {
             setNutritionalInfo(nutritionResult.data);
           } else {
-            toast({
-              variant: 'destructive',
-              title: 'Nutrition Info Error',
-              description: nutritionResult.error,
-            });
+            setNutritionalInfo(t.noNutrition);
           }
         } catch (err) {
           console.error(err);
+          setNutritionalInfo(t.noNutrition);
         } finally {
           setIsFetchingNutrition(false);
         }
       };
       fetchDetails();
     }
-  }, [selectedRecipe, toast, language]);
+  }, [selectedRecipe, language, t.noNutrition]);
 
   const handleNewSearch = () => {
     setRecipes(null);
@@ -652,47 +649,47 @@ export function FridgeChefClient() {
                       transition={{ type: 'spring', damping: 25, stiffness: 300 }}
                     >
                       <Card className="bg-card border-border/50 shadow-xl overflow-hidden">
-                        <CardHeader className="flex flex-row items-center justify-between pb-6 border-b bg-muted/5">
-                          <CardTitle className="text-3xl sm:text-4xl font-headline tracking-tight text-foreground">{selectedRecipe.title}</CardTitle>
+                        <CardHeader className="flex flex-row items-center justify-between pb-4 border-b bg-muted/5">
+                          <CardTitle className="text-3xl font-headline tracking-tight text-foreground">{selectedRecipe.title}</CardTitle>
                           <Button 
                             variant="ghost" 
                             size="icon" 
-                            className="rounded-full hover:bg-primary/20 w-12 h-12"
+                            className="rounded-full hover:bg-primary/20 w-10 h-10"
                             onClick={() => toggleFavorite(selectedRecipe)}
                           >
-                            <Heart className={cn("w-7 h-7 transition-all", isFavorite(selectedRecipe) ? "fill-red-500 text-red-500 scale-110" : "text-muted-foreground")} />
+                            <Heart className={cn("w-6 h-6 transition-all", isFavorite(selectedRecipe) ? "fill-red-500 text-red-500 scale-110" : "text-muted-foreground")} />
                           </Button>
                         </CardHeader>
-                        <CardContent className="space-y-10 p-6 sm:p-10">
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                            <div className="space-y-6">
-                              <h3 className="text-2xl font-bold flex items-center gap-2 font-headline text-foreground">
-                                <LeafyGreen className="text-primary-foreground" size={24}/>
+                        <CardContent className="space-y-6 p-6 sm:p-8">
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="space-y-3">
+                              <h3 className="text-xl font-bold flex items-center gap-2 font-headline text-foreground">
+                                <LeafyGreen className="text-primary-foreground" size={20}/>
                                 {t.ingredients}
                               </h3>
-                              <ul className="grid grid-cols-1 gap-3 bg-muted/10 p-6 rounded-2xl border border-border/40 shadow-sm">
+                              <ul className="grid grid-cols-1 gap-2 bg-muted/10 p-4 rounded-xl border border-border/40 shadow-sm">
                                 {selectedRecipe.ingredients.map((ing, i) => (
-                                  <li key={i} className="flex items-center gap-3 text-base text-foreground/80">
-                                    <div className="h-2 w-2 rounded-full bg-primary flex-shrink-0" />
+                                  <li key={i} className="flex items-center gap-2 text-sm text-foreground/80">
+                                    <div className="h-1.5 w-1.5 rounded-full bg-primary flex-shrink-0" />
                                     {ing}
                                   </li>
                                 ))}
                               </ul>
                             </div>
-                            <div className="space-y-6">
-                              <h3 className="text-2xl font-bold flex items-center gap-2 font-headline text-foreground">
-                                <GlassWater className="text-primary-foreground" size={24}/>
+                            <div className="space-y-3">
+                              <h3 className="text-xl font-bold flex items-center gap-2 font-headline text-foreground">
+                                <GlassWater className="text-primary-foreground" size={20}/>
                                 {t.nutritionalSummary}
                               </h3>
-                              <div className="p-6 bg-primary/5 rounded-2xl border border-primary/10 min-h-[120px] shadow-sm">
+                              <div className="p-4 bg-primary/5 rounded-xl border border-primary/10 min-h-[100px] shadow-sm">
                                 {isFetchingNutrition ? (
-                                  <div className="space-y-3">
-                                    <Skeleton className="h-4 w-full" />
-                                    <Skeleton className="h-4 w-5/6" />
-                                    <Skeleton className="h-4 w-4/6" />
+                                  <div className="space-y-2">
+                                    <Skeleton className="h-3 w-full" />
+                                    <Skeleton className="h-3 w-5/6" />
+                                    <Skeleton className="h-3 w-4/6" />
                                   </div>
                                 ) : (
-                                  <p className="text-base leading-relaxed text-muted-foreground italic font-medium">
+                                  <p className="text-sm leading-relaxed text-muted-foreground italic font-medium">
                                     {nutritionalInfo || t.noNutrition}
                                   </p>
                                 )}
@@ -702,25 +699,25 @@ export function FridgeChefClient() {
                           
                           <Separator />
                           
-                          <div className="space-y-6">
-                            <h3 className="text-2xl font-bold flex items-center gap-2 font-headline text-foreground">
-                              <Utensils className="text-primary-foreground" size={24}/>
+                          <div className="space-y-3">
+                            <h3 className="text-xl font-bold flex items-center gap-2 font-headline text-foreground">
+                              <Utensils className="text-primary-foreground" size={20}/>
                               {t.instructions}
                             </h3>
                             <div className="prose prose-neutral dark:prose-invert max-w-none">
-                              <ol className="space-y-2 list-none p-0">
+                              <ol className="space-y-1.5 list-none p-0 m-0">
                                 {selectedRecipe.instructions.map((step, i) => (
                                   <motion.li 
                                     key={i} 
                                     initial={{ opacity: 0, x: -10 }}
                                     animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: i * 0.05 }}
-                                    className="flex gap-3 items-start group"
+                                    transition={{ delay: i * 0.03 }}
+                                    className="flex gap-2 items-start group"
                                   >
-                                    <div className="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold shadow-sm group-hover:scale-110 transition-transform">
+                                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-[10px] font-bold shadow-sm group-hover:scale-105 transition-transform">
                                       {i + 1}
                                     </div>
-                                    <p className="text-sm text-foreground/90 pt-0.5 leading-tight">{step}</p>
+                                    <p className="text-xs text-foreground/90 pt-0.5 leading-tight m-0">{step}</p>
                                   </motion.li>
                                 ))}
                               </ol>
