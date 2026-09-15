@@ -123,7 +123,7 @@ const translations = {
     calm: "Calme",
     sunny: "Ensoleillé",
     rainy: "Pluvieux",
-    cold: "Froid",
+    cold: "Chaud",
     hot: "Chaud",
     festivalPlaceholder: "Ex : Noël...",
     mealTime: "Moment du Repas",
@@ -236,7 +236,7 @@ const translations = {
   or: {
     whatsInYourFridge: "ଆପଣଙ୍କ ଫ୍ରିଜରେ କ'ଣ ଅଛି?",
     placeholder: "ଯେପରିକି, ଭାତ, ଆଳୁ...",
-    generateRecipes: "ରେସିପି ପ୍ରସ୍ତୁତ କରନ୍ତୁ",
+    generateRecipes: "રેસિપિ પ્રસ્તુત કરો",
     startNewSearch: "ନୂତନ ସନ୍ଧାନ",
     craftingCulinary: "ଆପଣଙ୍କ ପାଇଁ ରେସିପି ପ୍ରସ୍ତୁତ ହେଉଛି...",
     aiChefWorking: "ଆମର AI ରୋଷେଇଆ କାମ କରୁଛନ୍ତି, ଶୀଘ୍ର ପ୍ରସ୍ତୁତ ହୋଇଯିବ!",
@@ -258,7 +258,7 @@ const translations = {
     energetic: "ଉତ୍ସାହୀ",
     calm: "ଶାନ୍ତ",
     sunny: "ଖରା",
-    rainy: "ବର୍ଷا",
+    rainy: "ବର୍ଷା",
     cold: "ଥଣ୍ଡା",
     hot: "ଗରମ",
     festivalPlaceholder: "ଯେପରିକି, ଦୀପାବଳି...",
@@ -749,25 +749,25 @@ export function FridgeChefClient() {
                           
                           <Separator />
                           
-                          <div className="space-y-8">
+                          <div className="space-y-6">
                             <h3 className="text-2xl font-bold flex items-center gap-2 font-headline text-foreground">
                               <Utensils className="text-primary-foreground" size={24}/>
                               {t.instructions}
                             </h3>
                             <div className="prose prose-neutral dark:prose-invert max-w-none">
-                              <ol className="space-y-6 list-none p-0">
+                              <ol className="space-y-3 list-none p-0">
                                 {selectedRecipe.instructions.map((step, i) => (
                                   <motion.li 
                                     key={i} 
                                     initial={{ opacity: 0, x: -10 }}
                                     animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: i * 0.1 }}
-                                    className="flex gap-6 items-start group"
+                                    transition={{ delay: i * 0.05 }}
+                                    className="flex gap-4 items-start group"
                                   >
-                                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold shadow-md group-hover:scale-110 transition-transform">
+                                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold shadow-md group-hover:scale-110 transition-transform">
                                       {i + 1}
                                     </div>
-                                    <p className="text-lg text-foreground/90 pt-1 leading-snug">{step}</p>
+                                    <p className="text-base text-foreground/90 pt-1 leading-normal">{step}</p>
                                   </motion.li>
                                 ))}
                               </ol>
