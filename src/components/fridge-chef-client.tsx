@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useActionState } from 'react';
-import { generateRecipesAction, summarizeNutritionalInfoAction } from '@/app/actions';
+import { generateRecipesAction, summarizeNutritionalInfoAction, generateRecipeImageAction } from '@/app/actions';
 import type { GenerateRecipesOutput } from '@/ai/flows/generate-recipes-from-ingredients';
 import { useToast } from '@/hooks/use-toast';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -15,8 +15,7 @@ import { Input } from '@/components/ui/input';
 import { AnimatePresence, motion } from 'framer-motion';
 import { 
   ChefHat, CookingPot, GlassWater, LeafyGreen, Loader2, Utensils, 
-  Sparkles, BookOpen, Globe, Heart, CloudSun, Smile, CalendarDays, PartyPopper,
-  Clock
+  Sparkles, BookOpen, Globe, Heart, CloudSun, Smile, PartyPopper, Clock
 } from 'lucide-react';
 import {
   Select,
@@ -217,25 +216,25 @@ const translations = {
   },
   or: {
     whatsInYourFridge: "ଆପଣଙ୍କ ଫ୍ରିଜରେ କ'ଣ ଅଛି?",
-    generateRecipes: "ରେସିପି ପ୍ରସ୍ତୁତ କରନ୍ତୁ",
+    generateRecipes: "ਰੇସିପି ପ୍ରସ୍ତուତ କରନ୍ତុ",
     welcome: "FridgeChefକୁ ସ୍ୱାଗତ!",
-    recipeIdeas: "ରେସିପି ଆଇଡିଆ",
+    recipeIdeas: "ਰੇସିପି ଆଇଡିଆ",
     ingredients: "ସାମଗ୍ରୀ",
     nutritionalSummary: "ପୋଷଣ ସାରାଂଶ",
     instructions: "ନିର୍ଦ୍દેશାବଳୀ",
-    language: "ଭାଷା",
+    language: "ଭାଷา",
     favorites: "ପସନ୍ଦିତ",
     kitchenVibe: "ରୋଷେଇ ଘର ମାହୋଲ",
     mood: "ମନୋଭାବ",
     weather: "ପାଣିପାଗ",
-    festival: "ପର୍ବ / ଅବସର",
+    festival: "ପର୍ବ / ଅବସਰ",
     happy: "ଖୁସି",
     tired: "ଥକିଯାଇଥିବା",
-    energetic: "ଉତ୍ସାହୀ",
+    energetic: "ଉତ୍ସาହୀ",
     calm: "ଶାନ୍ତ",
     sunny: "ଖରା",
     rainy: "ବର୍ଷା",
-    cold: "ଥଣ୍ડા",
+    cold: "ଥଣ୍ଡା",
     hot: "ଗରମ",
     mealTime: "ଭୋଜନ ସମୟ",
     breakfast: "ଜଳଖିଆ",
@@ -247,7 +246,7 @@ const translations = {
     generateRecipes: "ਵਿਅੰਜਨ ਬਣਾਓ",
     welcome: "FridgeChef ਵਿੱਚ ਸੁਆਗਤ ਹੈ!",
     recipeIdeas: "ਵਿਅੰਜਨ ਵਿਚਾਰ",
-    ingredients: "ਸਮੱਗரி",
+    ingredients: "ਸਮੱਗਰੀ",
     nutritionalSummary: "ਪੋਸ਼ਣ ਸੰਬੰਧੀ ਸਾਰ",
     instructions: "ਹਦਾਇਤਾਂ",
     language: "ਭਾਸ਼ਾ",
@@ -305,7 +304,9 @@ export function FridgeChefClient() {
   const [recipes, setRecipes] = useState<Recipe[] | null>(null);
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
   const [nutritionalInfo, setNutritionalInfo] = useState<string | null>(null);
+  const [recipeImage, setRecipeImage] = useState<string | null>(null);
   const [isFetchingNutrition, setIsFetchingNutrition] = useState(false);
+  const [isFetchingImage, setIsFetchingImage] = useState(false);
   const [formKey, setFormKey] = useState(Date.now());
   const [favorites, setFavorites] = useState<Recipe[]>([]);
 
@@ -331,24 +332,51 @@ export function FridgeChefClient() {
       const fetchDetails = async () => {
         setIsFetchingNutrition(true);
         setNutritionalInfo(null);
+        setIsFetchingImage(true);
+        setRecipeImage(null);
 
-        const nutritionResult = await summarizeNutritionalInfoAction({
-          recipeName: selectedRecipe.title,
-          ingredients: selectedRecipe.ingredients,
-          instructions: selectedRecipe.instructions,
-          language: language
-        });
-
-        if (nutritionResult.success) {
-          setNutritionalInfo(nutritionResult.data);
-        } else {
-          toast({
-            variant: 'destructive',
-            title: 'Nutrition Info Error',
-            description: nutritionResult.error,
+        try {
+          const nutritionResult = await summarizeNutritionalInfoAction({
+            recipeName: selectedRecipe.title,
+            ingredients: selectedRecipe.ingredients,
+            instructions: selectedRecipe.instructions,
+            language: language
           });
+
+          if (nutritionResult.success) {
+            setNutritionalInfo(nutritionResult.data);
+          } else {
+            toast({
+              variant: 'destructive',
+              title: 'Nutrition Info Error',
+              description: nutritionResult.error,
+            });
+          }
+        } catch (err) {
+          console.error(err);
+        } finally {
+          setIsFetchingNutrition(false);
         }
-        setIsFetchingNutrition(false);
+
+        try {
+          const imageResult = await generateRecipeImageAction({
+            recipeName: selectedRecipe.title,
+          });
+
+          if (imageResult.success) {
+            setRecipeImage(imageResult.data);
+          } else {
+            toast({
+              variant: 'destructive',
+              title: 'Image Error',
+              description: imageResult.error,
+            });
+          }
+        } catch (err) {
+          console.error(err);
+        } finally {
+          setIsFetchingImage(false);
+        }
       };
       fetchDetails();
     }
@@ -358,6 +386,7 @@ export function FridgeChefClient() {
     setRecipes(null);
     setSelectedRecipe(null);
     setNutritionalInfo(null);
+    setRecipeImage(null);
     setFormKey(Date.now());
   };
 
@@ -608,7 +637,26 @@ export function FridgeChefClient() {
                           </Button>
                         </CardHeader>
                         <CardContent className="space-y-10">
-                          <div className="grid md:grid-cols-2 gap-8">
+                          <div className="relative w-full h-[320px] rounded-xl overflow-hidden bg-muted/30 border border-border/40 shadow-inner flex items-center justify-center">
+                            {isFetchingImage ? (
+                              <div className="flex flex-col items-center gap-2">
+                                <Loader2 className="h-8 w-8 animate-spin text-primary-foreground" />
+                                <p className="text-xs text-muted-foreground animate-pulse">Generating meal image...</p>
+                              </div>
+                            ) : recipeImage ? (
+                              <img 
+                                src={recipeImage} 
+                                alt={selectedRecipe.title}
+                                className="w-full h-full object-cover rounded-xl transition-all duration-300"
+                              />
+                            ) : (
+                              <div className="flex flex-col items-center text-muted-foreground/30 gap-2">
+                                <CookingPot size={48} />
+                              </div>
+                            )}
+                          </div>
+
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div className="space-y-4">
                               <h3 className="text-xl font-bold flex items-center gap-2 font-headline border-b pb-2">
                                 <LeafyGreen className="text-primary-foreground" size={20}/>
@@ -649,7 +697,7 @@ export function FridgeChefClient() {
                               <Utensils className="text-primary-foreground" size={20}/>
                               {t.instructions}
                             </h3>
-                            <div className="prose prose-neutral dark:prose-invert max-w-none prose-sm sm:prose-base">
+                            <div className="prose prose-neutral dark:prose-invert max-w-none">
                               <ol className="space-y-4 marker:text-primary marker:font-bold">
                                 {selectedRecipe.instructions.map((step, i) => (
                                   <li key={i} className="pl-2">

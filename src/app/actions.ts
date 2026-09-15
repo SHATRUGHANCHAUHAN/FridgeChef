@@ -9,6 +9,10 @@ import {
   summarizeNutritionalInformation,
   SummarizeNutritionalInformationInput,
 } from '@/ai/flows/summarize-nutritional-information';
+import {
+  generateRecipeImage,
+  GenerateRecipeImageInput,
+} from '@/ai/flows/generate-recipe-image';
 import { z } from 'zod';
 
 const GenerateRecipesActionSchema = z.object({
@@ -71,5 +75,21 @@ export async function summarizeNutritionalInfoAction(
   } catch (error) {
     console.error('Error summarizing nutritional info:', error);
     return { success: false, error: 'Failed to get nutritional information.' };
+  }
+}
+
+type GenerateRecipeImageActionResult =
+  | { success: true; data: string }
+  | { success: false; error: string };
+
+export async function generateRecipeImageAction(
+  input: GenerateRecipeImageInput
+): Promise<GenerateRecipeImageActionResult> {
+  try {
+    const result = await generateRecipeImage(input);
+    return { success: true, data: result.imageUrl };
+  } catch (error) {
+    console.error('Error generating recipe image:', error);
+    return { success: false, error: 'Failed to generate recipe image.' };
   }
 }
