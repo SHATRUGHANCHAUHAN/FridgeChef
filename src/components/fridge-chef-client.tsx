@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useActionState } from 'react';
-import { generateRecipesAction, summarizeNutritionalInfoAction, generateRecipeImageAction } from '@/app/actions';
+import { generateRecipesAction, summarizeNutritionalInfoAction } from '@/app/actions';
 import type { GenerateRecipesOutput } from '@/ai/flows/generate-recipes-from-ingredients';
 import { useToast } from '@/hooks/use-toast';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -107,7 +107,7 @@ const translations = {
     welcome: "Bienvenue sur FridgeChef !",
     welcomeSub: "Entrez ingrédients, humeur et météo pour des idées personnalisées.",
     recipeIdeas: "Idées de Recettes",
-    ingredients: "Ingrédients",
+    ingredients: "Ingredients",
     nutritionalSummary: "Résumé Nutritionnel",
     instructions: "Instructions",
     noNutrition: "Aucune information nutritionnelle.",
@@ -282,7 +282,7 @@ const translations = {
     instructions: "ਤਰੀਕਾ",
     noNutrition: "ਕੋਈ ਪੋਸ਼ਣ ਸੰਬੰਧੀ ਜਾਣਕਾਰੀ ਉਪਲਬਧ ਨਹੀਂ ਹੈ।",
     language: "ਭਾਸ਼ਾ",
-    favorites: "ਮਨਪਸੰਦ",
+    favorites: "ਮਨਪਸੰદ",
     kitchenVibe: "ਕਿਚਨ ਵਾਈਬ",
     mood: "ਮੂਡ",
     weather: "ਮੌਸਮ",
@@ -344,12 +344,10 @@ export function FridgeChefClient() {
   const [recipes, setRecipes] = useState<Recipe[] | null>(null);
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
   const [nutritionalInfo, setNutritionalInfo] = useState<string | null>(null);
-  const [recipeImage, setRecipeImage] = useState<string | null>(null);
   const [isFetchingNutrition, setIsFetchingNutrition] = useState(false);
-  const [isFetchingImage, setIsFetchingImage] = useState(false);
   const [formKey, setFormKey] = useState(1);
   const [favorites, setFavorites] = useState<Recipe[]>([]);
-  const [clientDay, setClientDay] = useState<string>('Monday');
+  const [clientDay, setClientDay] = useState<string>('');
 
   useEffect(() => {
     setClientDay(new Date().toLocaleDateString('en-US', { weekday: 'long' }));
@@ -377,8 +375,6 @@ export function FridgeChefClient() {
       const fetchDetails = async () => {
         setIsFetchingNutrition(true);
         setNutritionalInfo(null);
-        setIsFetchingImage(true);
-        setRecipeImage(null);
 
         try {
           const nutritionResult = await summarizeNutritionalInfoAction({
@@ -402,26 +398,6 @@ export function FridgeChefClient() {
         } finally {
           setIsFetchingNutrition(false);
         }
-
-        try {
-          const imageResult = await generateRecipeImageAction({
-            recipeName: selectedRecipe.title,
-          });
-
-          if (imageResult.success) {
-            setRecipeImage(imageResult.data);
-          } else {
-            toast({
-              variant: 'destructive',
-              title: 'Image Error',
-              description: imageResult.error,
-            });
-          }
-        } catch (err) {
-          console.error(err);
-        } finally {
-          setIsFetchingImage(false);
-        }
       };
       fetchDetails();
     }
@@ -431,7 +407,6 @@ export function FridgeChefClient() {
     setRecipes(null);
     setSelectedRecipe(null);
     setNutritionalInfo(null);
-    setRecipeImage(null);
     setFormKey(prev => prev + 1);
   };
 
@@ -689,28 +664,6 @@ export function FridgeChefClient() {
                           </Button>
                         </CardHeader>
                         <CardContent className="space-y-10 p-6 sm:p-10">
-                          <div className="relative w-full h-[320px] sm:h-[450px] rounded-2xl overflow-hidden bg-muted/30 border border-border/40 shadow-2xl flex items-center justify-center group">
-                            {isFetchingImage ? (
-                              <div className="flex flex-col items-center gap-4">
-                                <Loader2 className="h-10 w-10 animate-spin text-primary" />
-                                <p className="text-sm font-medium text-muted-foreground animate-pulse tracking-wide uppercase">Visualizing Recipe...</p>
-                              </div>
-                            ) : recipeImage ? (
-                              <motion.img 
-                                initial={{ scale: 1.1 }}
-                                animate={{ scale: 1 }}
-                                src={recipeImage} 
-                                alt={selectedRecipe.title}
-                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                              />
-                            ) : (
-                              <div className="flex flex-col items-center text-muted-foreground/20 gap-2">
-                                <CookingPot size={80} />
-                              </div>
-                            )}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
-                          </div>
-
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                             <div className="space-y-6">
                               <h3 className="text-2xl font-bold flex items-center gap-2 font-headline text-foreground">
@@ -755,19 +708,19 @@ export function FridgeChefClient() {
                               {t.instructions}
                             </h3>
                             <div className="prose prose-neutral dark:prose-invert max-w-none">
-                              <ol className="space-y-3 list-none p-0">
+                              <ol className="space-y-2 list-none p-0">
                                 {selectedRecipe.instructions.map((step, i) => (
                                   <motion.li 
                                     key={i} 
                                     initial={{ opacity: 0, x: -10 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: i * 0.05 }}
-                                    className="flex gap-4 items-start group"
+                                    className="flex gap-3 items-start group"
                                   >
-                                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold shadow-md group-hover:scale-110 transition-transform">
+                                    <div className="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold shadow-sm group-hover:scale-110 transition-transform">
                                       {i + 1}
                                     </div>
-                                    <p className="text-base text-foreground/90 pt-1 leading-normal">{step}</p>
+                                    <p className="text-sm text-foreground/90 pt-0.5 leading-tight">{step}</p>
                                   </motion.li>
                                 ))}
                               </ol>
