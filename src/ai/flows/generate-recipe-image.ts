@@ -27,12 +27,12 @@ const generateRecipeImageFlow = ai.defineFlow(
   },
   async input => {
     const { media } = await ai.generate({
-      model: 'googleai/imagen-4.0-fast-generate-001',
-      prompt: `A professional food photography shot of ${input.recipeName}, beautifully plated, high detail, delicious culinary look, cinematic studio lighting.`,
+      model: 'googleai/imagen-3',
+      prompt: `A professional, high-resolution food photography shot of ${input.recipeName}. Beautifully plated, delicious looking, cinematic studio lighting, high detail, vibrant culinary colors.`,
     });
 
     if (!media || !media.url) {
-      throw new Error('Image generation failed.');
+      throw new Error('Image generation returned no media result.');
     }
 
     return {

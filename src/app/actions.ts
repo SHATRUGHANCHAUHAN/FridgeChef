@@ -56,9 +56,9 @@ export async function generateRecipesAction(
       return { success: false, error: 'Could not generate recipes. Try different ingredients or context.' };
     }
     return { success: true, data: recipes };
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error generating recipes:', error);
-    return { success: false, error: 'An unexpected error occurred. Please try again later.' };
+    return { success: false, error: error.message || 'An unexpected error occurred. Please try again later.' };
   }
 }
 
@@ -72,9 +72,9 @@ export async function summarizeNutritionalInfoAction(
   try {
     const result = await summarizeNutritionalInformation(input);
     return { success: true, data: result.summary };
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error summarizing nutritional info:', error);
-    return { success: false, error: 'Failed to get nutritional information.' };
+    return { success: false, error: error.message || 'Failed to get nutritional information.' };
   }
 }
 
@@ -88,8 +88,8 @@ export async function generateRecipeImageAction(
   try {
     const result = await generateRecipeImage(input);
     return { success: true, data: result.imageUrl };
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error generating recipe image:', error);
-    return { success: false, error: 'Failed to generate recipe image.' };
+    return { success: false, error: error.message || 'Failed to generate recipe image.' };
   }
 }
