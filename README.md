@@ -1,22 +1,21 @@
 # FridgeChef 🍳
 
-FridgeChef is a modern, AI-powered recipe generator that helps you create delicious meals using the ingredients you already have in your kitchen. It uniquely considers your current mood, the weather, and special occasions to suggest the perfect dish for any moment.
+FridgeChef is a modern, AI-powered recipe generator that helps you create delicious meals using the ingredients you already have in your kitchen. It uniquely considers your current mood, the weather, and meal timing to suggest the perfect dish for any moment.
 
 ## ✨ Features
 
 - **AI-Powered Recipe Generation:** Instantly creates recipes tailored to your available ingredients.
 - **Kitchen Vibe™ Personalization:** Adjusts suggestions based on your mood (Happy, Tired, etc.), weather (Sunny, Rainy, etc.), and even local festivals.
 - **Meal Timing:** Choose between Breakfast, Lunch, or Dinner for time-appropriate suggestions.
-- **AI Meal Visualization:** Real-time image generation for every recipe using Imagen 3.
 - **Multilingual Experience:** Full support for English, Español, Français, हिन्दी, ગુજરાતી, தமிழ், ଓଡ଼ିଆ, ਪੰਜਾਬੀ, and اردو.
-- **Health Insights:** Automated nutritional summaries for every generated recipe.
+- **Health Insights:** Automated nutritional summaries for every generated recipe with AI-powered safety fallback.
 - **Favorites:** Save and manage your favorite culinary discoveries with a single click.
-- **Modern UI/UX:** A clean, responsive interface with smooth animations and professional styling.
+- **Modern UI/UX:** A clean, responsive interface built with Shadcn UI and Framer Motion.
 
 ## 🛠️ Tech Stack
 
 - **Framework:** [Next.js 15](https://nextjs.org/) (App Router)
-- **AI Engine:** [Firebase Genkit](https://firebase.google.com/docs/genkit) with Gemini 2.0 & Imagen 3
+- **AI Engine:** [Firebase Genkit](https://firebase.google.com/docs/genkit) with Gemini 2.0
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/)
 - **UI Components:** [Shadcn UI](https://ui.shadcn.com/)
 - **Animations:** [Framer Motion](https://www.framer.com/motion/)
