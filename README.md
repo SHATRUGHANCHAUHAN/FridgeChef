@@ -4,13 +4,13 @@ FridgeChef is a modern, AI-powered recipe generator that helps you create delici
 
 ## ✨ Features
 
-- **AI-Powered Recipe Generation:** Instantly creates recipes tailored to your available ingredients.
+- **AI-Powered Recipe Generation:** Instantly creates recipes tailored to your available ingredients using Google's Gemini models via Firebase Genkit.
 - **Kitchen Vibe™ Personalization:** Adjusts suggestions based on your mood (Happy, Tired, etc.), weather (Sunny, Rainy, etc.), and even local festivals.
 - **Meal Timing:** Choose between Breakfast, Lunch, or Dinner for time-appropriate suggestions.
 - **Multilingual Experience:** Full support for English, Español, Français, हिन्दी, ગુજરાતી, தமிழ், ଓଡ଼ିଆ, ਪੰਜਾਬੀ, and اردو.
 - **Health Insights:** Automated nutritional summaries for every generated recipe.
 - **Favorites:** Save and manage your favorite culinary discoveries with a single click.
-- **Modern UI/UX:** A clean, responsive interface built with Shadcn UI and Framer Motion.
+- **Modern UI/UX:** A clean, responsive interface built with Shadcn UI, Tailwind CSS, and Framer Motion.
 
 ## 🛠️ Tech Stack
 
@@ -26,7 +26,7 @@ FridgeChef is a modern, AI-powered recipe generator that helps you create delici
 ### Prerequisites
 
 - Node.js 18+
-- A Google Cloud/Firebase project with the Gemini API enabled.
+- A Google AI (Gemini) API Key.
 
 ### Installation
 
