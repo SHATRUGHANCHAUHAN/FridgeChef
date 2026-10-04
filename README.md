@@ -8,7 +8,7 @@ FridgeChef is a modern, AI-powered recipe generator that helps you create delici
 - **Kitchen Vibe™ Personalization:** Adjusts suggestions based on your mood (Happy, Tired, etc.), weather (Sunny, Rainy, etc.), and even local festivals.
 - **Meal Timing:** Choose between Breakfast, Lunch, or Dinner for time-appropriate suggestions.
 - **Multilingual Experience:** Full support for English, Español, Français, हिन्दी, ગુજરાતી, தமிழ், ଓଡ଼ିଆ, ਪੰਜਾਬੀ, and اردو.
-- **Health Insights:** Automated nutritional summaries for every generated recipe with AI-powered safety fallback.
+- **Health Insights:** Automated nutritional summaries for every generated recipe.
 - **Favorites:** Save and manage your favorite culinary discoveries with a single click.
 - **Modern UI/UX:** A clean, responsive interface built with Shadcn UI and Framer Motion.
 
@@ -32,8 +32,8 @@ FridgeChef is a modern, AI-powered recipe generator that helps you create delici
 
 1. **Clone the repository:**
    ```bash
-   git clone <your-repository-url>
-   cd fridge-chef
+   git clone https://github.com/SHATRUGHANCHAUHAN/FridgeChef.git
+   cd FridgeChef
    ```
 
 2. **Install dependencies:**
@@ -52,13 +52,6 @@ FridgeChef is a modern, AI-powered recipe generator that helps you create delici
    npm run dev
    ```
    Open [http://localhost:9002](http://localhost:9002) in your browser.
-
-## 📱 Project Structure
-
-- `src/ai`: Genkit flows, prompts, and AI configuration.
-- `src/app`: Next.js pages, layouts, and Server Actions.
-- `src/components`: Reusable UI components and the main client-side logic.
-- `src/hooks`: Custom React hooks for responsiveness and state management.
 
 ## 📄 License
 
