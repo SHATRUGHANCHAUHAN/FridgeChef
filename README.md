@@ -1,21 +1,21 @@
 # FridgeChef 🍳
 
-FridgeChef is a modern, AI-powered recipe generator that helps you create delicious meals using the ingredients you already have in your kitchen. It uniquely considers your current mood, the weather, and meal timing to suggest the perfect dish for any moment.
+FridgeChef is a modern, AI-powered recipe generator that helps you create delicious meals using the ingredients you already have in your kitchen. It considers your current mood, the weather, and meal timing to suggest the perfect dish for any moment.
 
 ## ✨ Features
 
 - **AI-Powered Recipe Generation:** Instantly creates recipes tailored to your available ingredients using Google's Gemini models via Firebase Genkit.
-- **Kitchen Vibe™ Personalization:** Adjusts suggestions based on your mood (Happy, Tired, etc.), weather (Sunny, Rainy, etc.), and even local festivals.
-- **Meal Timing:** Choose between Breakfast, Lunch, or Dinner for time-appropriate suggestions.
+- **Kitchen Vibe™ Personalization:** Adjusts suggestions based on your mood (Happy, Tired, Energetic, Calm), weather (Sunny, Rainy, Cold, Hot), and specific meal times.
+- **Meal Timing:** Specialized suggestions for Breakfast, Lunch, or Dinner.
 - **Multilingual Experience:** Full support for English, Español, Français, हिन्दी, ગુજરાતી, தமிழ், ଓଡ଼ିଆ, ਪੰਜਾਬੀ, and اردو.
-- **Health Insights:** Automated nutritional summaries for every generated recipe.
-- **Favorites:** Save and manage your favorite culinary discoveries with a single click.
-- **Modern UI/UX:** A clean, responsive interface built with Shadcn UI, Tailwind CSS, and Framer Motion.
+- **Health Insights:** Automated nutritional summaries for every generated recipe with safety-fallback mechanisms.
+- **Favorites:** Save and manage your favorite culinary discoveries locally.
+- **Modern UI/UX:** A clean, responsive interface built with Shadcn UI, Tailwind CSS, and Framer Motion, optimized for readability.
 
 ## 🛠️ Tech Stack
 
 - **Framework:** [Next.js 15](https://nextjs.org/) (App Router)
-- **AI Engine:** [Firebase Genkit](https://firebase.google.com/docs/genkit) with Gemini 2.0
+- **AI Engine:** [Firebase Genkit](https://firebase.google.com/docs/genkit) with Gemini 2.0 Flash
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/)
 - **UI Components:** [Shadcn UI](https://ui.shadcn.com/)
 - **Animations:** [Framer Motion](https://www.framer.com/motion/)
